@@ -1,0 +1,38 @@
+h1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+body{
+    width: 97%;
+    background-image: url("../images/pawprints.jpg");
+}
+.ppptitle{
+    text-align: center;
+}
+
+#button-addon2{
+    background-color: white;
+}
+
+.hide{
+     display: none; 
+}
+
+.nearYou{
+    text-align: center;
+    margin: auto;
+}
+
+.jumbotron-fluid{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.zipCode{
+    margin-left: auto;
+    margin-right: auto;
+}
