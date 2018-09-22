@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    <title>Dog Days</title>
+
+</head>
+
+<body>
+	<label>ZIP CODE</label>
+	<input id="zip" type="number" name="zipcode">
+	<button id="zipbutton">SUBMIT ZIP CODE</button>
+
+	<p>Parks with Dogs</p>
+	<div id="active"></div>
+
+	<p>Parks without Dogs</p>
+	<div id="inactive"></div>
+
+<p>
+class="parkbutton" this class should be attached to the select button for each park.  
+
+id="dogdaybutton" for the submit button for the user's time and dog info
+
+id="start" for the inputed arrival time form
+id="end" for the inputed end time form
+id="dogName" for the name of dog form
+id="dogBreed" for the name of dog breed form
+</p>
+
+</body>
+
+	<!-- Added link to the jQuery Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- LINK TO FIREBASE GOES HERE -->
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+	<!-- Link to Moment.js should go here -->
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	<!-- link to our JavaScript programming goes here -->
+<script src="pupscript.js" type="text/javascript"></script>
+
+</html>
