@@ -55,15 +55,15 @@ $(document).ready(function () {
 
 		// Initialize Firebase
 	let config = {
-		apiKey: "AIzaSyDv5rZU0ZW_kJohQ6A2c5PVnT91fz1jee0",
-		authDomain: "starfleet-patrol.firebaseapp.com",
-		databaseURL: "https://starfleet-patrol.firebaseio.com",
-		projectId: "starfleet-patrol",
-		storageBucket: "starfleet-patrol.appspot.com",
-		messagingSenderId: "590431002658"
+	    apiKey: "AIzaSyCReXH7G9fqpAGvccatlqbBf-FW0u0NB7c",
+	    authDomain: "puppy-b6f53.firebaseapp.com",
+	    databaseURL: "https://puppy-b6f53.firebaseio.com",
+	    projectId: "puppy-b6f53",
+	    storageBucket: "puppy-b6f53.appspot.com",
+	    messagingSenderId: "75752689696"
 	};
 
-	firebase.initializeApp(config);
+  	firebase.initializeApp(config);
 
 		// Create a variable to reference the database
 	let database = firebase.database();
@@ -87,14 +87,70 @@ $(document).ready(function () {
 		zip = $("#zip").val().trim();
 		zip = parseInt(zip);
 			console.log("User's zip is " + zip);
+
+//*** temp zip to see if program runs.  Delete this to use form zip
+zip = 78736;
+
 	});
 
 // --------------------------------------------------------------
 
-/*
 //***code to create request to google locations.  
-//***Code to pull addresses of nearby parks
 
+let userLL = "bob";
+
+		//Generate key request for Latitude and Longitude
+	let url = "https://maps.googleapis.com/maps/api/geocode/json";
+	url += '?' + $.param({
+	   'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+	   'address': "zip"
+	});
+	$(document).ready(function () {
+	       $.ajax({
+	           url: url,
+	           method: 'GET',
+	       }).done(function (result) {
+	           console.log(result);
+               userLL = result.results[0].geometry.location;
+               console.log("User lat and long: ", userLL);
+              return userLL;
+
+	       }).fail(function (err) {
+	           throw err;
+	       });
+	       return userLL;
+	});
+
+    console.log("User lat and long 2: ", userLL);
+
+		//***Generate key request for JSON object list of parks
+	let latLngUrl = "https://maps.googleapis.com/maps/api/geocode/json";
+	latLngUrl += '?' + $.param({
+	   'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+	   'location': userLL,
+	   'rtype': "park",
+	   'rankby': "distance",
+	   'name': "park"
+	});
+
+	$(document).ready(function () {
+	   $.ajax({
+	       url: latLngUrl,
+	       method: 'GET',
+	   }).done(function (result) {
+	   			//***Code to pull addresses of nearby parks
+	      	console.log(result);
+		        //test link
+	        let name = result.results[1].geometry.name;
+	            console.log("Name of 2nd Park: ", name);
+
+	   }).fail(function (err) {
+	       throw err;
+	   })
+	});
+});
+
+/*
 		//this is API Key
 	let apiKey = "***";
 
@@ -126,31 +182,53 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
 
 //***we store the retrieved data in an object called "Response"
 
-*/
+//***Function to make Inactive Park List and present it
 
-//Function to make Inactive Park List and present it
+	// const getLocationZip = zip => {
+	// 	let queryURL = ""
+	// 	$.get(queryURL)
 
-	const getLocationZip = zip => {
-		let queryURL = "***zip***"
-		$.get(queryURL)
 
-			//we store the retrieved data in an object called Response
-		.then(response => {
+    let queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.25208559999999,-97.9483898&radius=6500&type=park&key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&name=park";
 
-			console.log("Inactive Place ID: " + ***response.results[i].photos.place_id***);
-			console.log("Inactive Name: " + ***response.results[i].name***);
-			console.log("Inactive Address: " + ***response.results[i].vicinity***);
+        // Creates AJAX call for the specific movie button being clicked
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+      	//we store the retrieved data in an object called Response
+    }).then(function(response) {
 
-          // Creating a div to hold the park
-          let iparkDiv = $("<div class='ipark'>");
+			let buttonResults = response.data;
+				console.log("Button Results: ", buttonResults)
+			console.log("Inactive Place ID: " + response.results[i].photos.place_id);
+			console.log("Inactive Name: " + response.results[i].name);
+			console.log("Inactive Address: " + response.results[i].vicinity);
+	});
+});
 
-          // Storing the name data
-          let name = ***results[i].name***;
 
-          // Creating an element to have the name displayed
-          let parkName = $("<button>").text(name);
+          		// Creating a div to hold the park
+          	let iparkDiv = $("<div class='ipark'>");
 
-//*** need to figure out how to embed the "parkbutton" class into the buttons for each location.   
+          		// Grabbing the name data
+          	let name = ***results[i].name***;
+
+		  	// Then dynamicaly generating buttons for each movie in the array
+		  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+
+	          	// Creating an element to have the name displayed
+          	let parkName = $("<button>");
+  				// Adding a class of movie-btn to our button
+  			a.addClass("parkbutton");
+			  	// Adding a data-attribute
+			a.attr("data-name", name[i]);
+			  	// Providing the initial button text
+			a.text(name[i]);
+
+
+//*** Adding the button to the buttons-view div
+  $("#buttons-view").append(a);
+}
 
           // Displaying the park name
           iparkDiv.append(parkName);
@@ -437,10 +515,10 @@ response1 = JSON.parse(response);
 		console.log("End Time: " + endTime);
 
 		//loop to go through every available park
-	for (let i = 4; i >= 0; i--) {
+	for (let i = 0; i <= 4; i++) {
 
 			//loop to go through every active user
-		for (let j = ***OBJECTOFUSERS*** .length - 1; j >= 0; j--) {
+		for (let j = 0; j <= ***OBJECTOFUSERS*** .length;; j++) {
 
 				//grabs the place_id of the current location 
 			let locationParks = ***results[i].photos.place_id***
@@ -458,6 +536,7 @@ response1 = JSON.parse(response);
 					//Code to delete expired users
 				else  {
 //***delete user object code goes here
+	Research "Remove"
 					console.log("Expired / Delete");
 			}
 				//if the the current pulled park is inactive then this prints it to the correct div
@@ -471,7 +550,9 @@ response1 = JSON.parse(response);
 // --------------------------------------------------------------
 
 //Code to store the location picked by user.  
-	//RESEARCH THE UPDATE NOTATION FOR FIREBASE
+	//RESEARCH THE "UPDATE" NOTATION FOR FIREBASE
+	// For anyone still having trouble with firebase, https://firebase.google.com/docs/reference/js/firebase.database.Reference is probably the single most important page in the documentation.  On the right side of the page under `methods`, you'll find all the things you have access to on any database reference.  It's also where you'll find the `.push()` method.
+	//Try RETURNS function for comparing place IDs.  
 
 $(".parkbutton").on("click", function (event) {
 		event.preventDefault();
@@ -488,7 +569,7 @@ $(".parkbutton").on("click", function (event) {
 	});
 
 	const getLocationID = place_id => {
-		let queryURL = "____________place_id__________"
+		let queryURL = "***place_id***"
 		$.get(queryURL)
 
 			//we store the retrieved data in an object called Response
@@ -506,11 +587,11 @@ $(".parkbutton").on("click", function (event) {
 
 //Code to present available dog and other user end time at active park
 
-		let dogName = ________________
+		let dogName = ***
 			console.log("Waiting Dog" + dogName);
 		$(".needfriend").text(dogName + "needs a friend!");
 
-		let endtime = ________________
+		let endtime = ***
 		endtime = moment(endtime, "hh:mm a")
 			console.log("end time of other user: " + endtime);
 		$(".endtime").text("Will be there till: " + endtime);
