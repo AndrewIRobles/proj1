@@ -25,6 +25,10 @@ body{
 .nearYou{
     text-align: center;
     margin: auto;
+    background-color: #e9ecef;
+    color: rgb(34, 58, 58);
+    font-size: 32px;
+    font-style: bold;
 }
 
 .jumbotron-fluid{
@@ -38,4 +42,11 @@ body{
     margin-right: auto;
 }
 
-@media(ma)
+.newParty{
+    text-align: center;
+    margin: auto;
+    background-color: #e9ecef;
+    color: rgb(34, 58, 58);
+    font-size: 32px;
+    font-style: bold;
+}
