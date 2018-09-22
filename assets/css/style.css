@@ -6,9 +6,10 @@ h1{
 }
 
 body{
-    width: 97%;
+    width: 100%;
     background-image: url("../images/pawprints.jpg");
 }
+
 .ppptitle{
     text-align: center;
 }
@@ -36,3 +37,5 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+
+@media(ma)
