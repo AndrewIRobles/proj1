@@ -3,15 +3,76 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style3.css">
     <title>Pups, Parks n Playdates</title>
+
 </head>
 
 <body>
+    <div class="container">
+        <div id="pageone">
+            <div class="row">
+                <div class="jumbotron jumbotron-fluid col-xs-12">
+                    <div class="container ppptitle">
+                        <h1 class="display-4">Pups, Parks, and Playdates</h1>
+                        <p class="lead">Welcome to the party! Enter your zip code to get started.</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row zipCode">
+                <div class="col-xs-3"></div>
+                <div class="input-group mb-3 col-xs-8">
+                    <input type="text" class="form-control" placeholder="Zip Code" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go!</button>
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="pagetwo">
+            <header class="row">
+                <div class="col-12 nearYou">
+                    Parks with Pups Near You:
+                </div>
+            </header>
+            <div>
+                <ul style="list-style-type:circle">
+                    <!--                     append to list thru js here
+ -->
+                </ul>
+            </div>
+            <header class="row">
+                <div class="col-12 newParty">
+                    Start a New Pup Party
+                </div>
+            </header>
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <p>Your Location:</p>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="select a park" aria-label="park" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     <!---------------------------------- PAGE THREE ------------------------------------------------------>
     <div id="page3">
         <div class="row">
@@ -120,14 +181,17 @@
                 </form>
             
     </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="assets/js/pup-app.js"></script>
+
 </body>
 
 </html>
