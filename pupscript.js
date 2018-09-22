@@ -1,4 +1,7 @@
 /* 
+
+NOTE the expression *** denotes a place where code needs to be added or completed.  
+
 STUFF THE HTML FILES WILL NEED
 
 id="zipbutton" for the submit button for the zip code
@@ -17,39 +20,11 @@ id="end" for the inputed end time form
 id="dogName" for the name of dog form
 id="dogBreed" for the name of dog breed form
 
-*/
+// --------------------------------------------------------------
 
+OUTLINE OF HOW CODE IS LAID OUT
 
-	//load Jqery stuff
-$(document).ready(function () {
-
-		// Initialize Firebase
-	let config = {
-		apiKey: "AIzaSyDv5rZU0ZW_kJohQ6A2c5PVnT91fz1jee0",
-		authDomain: "starfleet-patrol.firebaseapp.com",
-		databaseURL: "https://starfleet-patrol.firebaseio.com",
-		projectId: "starfleet-patrol",
-		storageBucket: "starfleet-patrol.appspot.com",
-		messagingSenderId: "590431002658"
-	};
-
-	firebase.initializeApp(config);
-
-		// Create a variable to reference the database
-	let database = firebase.database();
-
-		// Initial Values
-	let zip = "";
-	let parkName = "";
-	let parkLocation = "";
-	let startTime = "";
-	let endTime = "";
-	let dogName = "";
-	let dogBreed = "";
-
-	// --------------------------------------------------------------
-
-	//Code to collect Zip Code
+//Code to collect Zip Code
 
 //Code to pull addresses of nearby parks
 
@@ -73,91 +48,55 @@ $(document).ready(function () {
 
 //Code to factoids and pics of available dog. 
 
+*/
 
-	// --------------------------------------------------------------
+	//load Jqery stuff
+$(document).ready(function () {
+
+		// Initialize Firebase
+	let config = {
+		apiKey: "AIzaSyDv5rZU0ZW_kJohQ6A2c5PVnT91fz1jee0",
+		authDomain: "starfleet-patrol.firebaseapp.com",
+		databaseURL: "https://starfleet-patrol.firebaseio.com",
+		projectId: "starfleet-patrol",
+		storageBucket: "starfleet-patrol.appspot.com",
+		messagingSenderId: "590431002658"
+	};
+
+	firebase.initializeApp(config);
+
+		// Create a variable to reference the database
+	let database = firebase.database();
+
+		// Set up variables
+	let zip = "";
+	let response = "";
+	let parkName = "";
+	let parkLocation = "";
+	let startTime = "";
+	let endTime = "";
+	let dogName = "";
+	let dogBreed = "";
+
+// --------------------------------------------------------------
 
 		//Code to collect Zip Code
 		// Whenever a user clicks the submit button
 	$("#zipbutton").on("click", function (event) {
 		event.preventDefault();
-
 		zip = $("#zip").val().trim();
 		zip = parseInt(zip);
 			console.log("User's zip is " + zip);
-
-		// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
-			//not sure if we need to store this in Firebase or not???  
-/*		database.ref("/zip").push({
-			zip: zip,
-		});
-*/
 	});
 
-	// --------------------------------------------------------------
+// --------------------------------------------------------------
 
-//Code to pull addresses of nearby parks
-
-	// --------------------------------------------------------------
-
-//Code to retrieve Active Park Locations
-
-	// At the initial load and subsequent value changes, get a snapshot of the stored data.
-	// This function allows you to update your page in real-time when the firebase database changes.
-	database.ref("/dogday").on("child_added", function (snapshot) {
-
-		// Set the variables equal to the stored values.
-		parkName = snapshot.val().parkName;
-		parkLocation = snapshot.val().parkLocation;
-		startTime = snapshot.val().startTime;
-		endTime = snapshot.val().endTime;
-		dogName = snapshot.val().dogName;
-		dogBreed = snapshot.val().dogBreed;
-		dogAge = snapshot.val().dogAge;
-
-	// --------------------------------------------------------------
-
-//Code to compare locations on list to Active Park List
-	//should exclude ones with less then 15 min on time?
-
-		// Current Time
-	let currentTime = moment();
-	let currentTimeM = moment(currentTime).format("HH:mm");
-	let currentTimeU = moment(currentTime).format("X");
-		console.log("Current M Time: " + currentTimeM);
-		console.log("Current U Time: " + currentTimeU);
-
-		// First Time
-	startTime = moment(startTime, "hh:mm a")
-	startTimeU = moment(startTime, "X")
-		console.log("Start Time: " + startTime);
-
-	if (currentTimeU <= endTimeU - 900) {
-		console.log("keeper");
-
-	}
-
-//Code to delete expired users?
-	else if (currentTimeU > endTimeU - 900) {
-//delete object
-		console.log("delete");
-
-	}
-
-//Code to make Active Park List and present it
-	//with links to that parks' Google Map / Google Locations page
-
-//Code to make Inactive Park List and present it
-	//with links to that parks' Google Map / Google Locations page
-
-//Sample array of parks
-let parks = ["ChIJ7dYj-ahOW4YR9CpbJzUobp4", "ChIJsfdtb3NJW4YRBKOsEYLvMU8", "ChIJU5lYru03W4YRD0Uk-f1m0zA", "ChIJA8_mGihJW4YRtjhgLrRTGk0", "ChIJ7dYj-ahOW4YR9CpbJzUobp4"];
-
-
-    	// displayParks function re-renders the HTML to display the list of Parks
-    function displayParks() {
-
-//code to create request to google locations.  
 /*
+//***code to create request to google locations.  
+//***Code to pull addresses of nearby parks
+
+		//this is API Key
+	let apiKey = "***";
 
 1st call: Using a given zipcode, pull latitude and longitude:
 
@@ -184,30 +123,40 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
           url: queryURL,
           method: "GET"
         }).then(function(response) {
+
+//***we store the retrieved data in an object called "Response"
+
 */
 
-		let location = results[i].photos.place_id
+//Function to make Inactive Park List and present it
 
-		if (location === locationActive) {
-// code for Active Parks
-		};
+	const getLocationZip = zip => {
+		let queryURL = "***zip***"
+		$.get(queryURL)
 
-		else {
+			//we store the retrieved data in an object called Response
+		.then(response => {
+
+			console.log("Inactive Place ID: " + ***response.results[i].photos.place_id***);
+			console.log("Inactive Name: " + ***response.results[i].name***);
+			console.log("Inactive Address: " + ***response.results[i].vicinity***);
 
           // Creating a div to hold the park
           let iparkDiv = $("<div class='ipark'>");
 
           // Storing the name data
-          let name = results[i].name;
+          let name = ***results[i].name***;
 
           // Creating an element to have the name displayed
           let parkName = $("<button>").text(name);
+
+//*** need to figure out how to embed the "parkbutton" class into the buttons for each location.   
 
           // Displaying the park name
           iparkDiv.append(parkName);
 
           // Retrieving the address for the park
-          let address = results[i].vicinity;
+          let address = ***results[i].vicinity***;
 
           // Creating an element to hold the address
           let addressOut = $("<p>").attr(address);
@@ -218,17 +167,311 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
           // Putting the entire park below the previous park
           $("#inactive").append(iparkDiv);
 
-		};
+//***with links to that parks' Google Map / Google Locations page??
 
-        });
+		});
+	}
+	
+//***Function to make Active Park List and present it
 
+	const getLocationID = place_id => {
+		let queryURL = "***place_id***"
+		$.get(queryURL)
+
+			//we store the retrieved data in an object called Response
+		.then(idResponse => {
+
+			console.log("Active Place ID: " + ***idResponse.results.photos.place_id***);
+			console.log("Active Name: " + ***idResponse.results.name***);
+			console.log("Active Address: " + ***idResponse.results.vicinity***);
+
+          // Creating a div to hold the park
+          let aparkDiv = $("<div class='apark'>");
+
+          // Storing the name data
+          let name = ***idResponse.results.name***;
+
+          // Creating an element to have the name displayed
+          let parkName = $("<button>").text(name);
+
+//*** need to figure out how to embed the "parkbutton" class into the buttons for each location.   
+
+          // Displaying the park name
+          aparkDiv.append(parkName);
+
+          // Retrieving the address for the park
+          let address = ***idResponse.results[i].vicinity***;
+
+          // Creating an element to hold the address
+          let addressOut = $("<p>").attr(address);
+
+          // Appending the address
+          aparkDiv.append(addressOut);
+
+          // Putting the entire park below the previous park
+          $("#active").append(aparkDiv);
+
+//***with links to that parks' Google Map / Google Locations page
+
+	};
+
+// --------------------------------------------------------------
+
+//TEST FILE OF LOCATIONS TO CHECK OTHER CODING...
+
+response = 
+{
+   "results" : [
+         "geometry" : {
+            "location" : {
+               "lat" : 30.2010375,
+               "lng" : -97.8872519
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 30.20238732989272,
+                  "lng" : -97.88590207010728
+               },
+               "southwest" : {
+                  "lat" : 30.19968767010728,
+                  "lng" : -97.88860172989273
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "3435d89d03f07ee0813bb1e4cc13d6ac135faca4",
+         "name" : "Circle C Ranch Metropolitan Park on Slaughter Creek",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2988,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104798857500405536211/photos\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAB_ntWVkRtDarCyY_CeBrQF0vTeH_9DonpcBxne9GTDEnjYIwkHDgfZbswjsq-Z_nAB3mX7_bql739v_X3xDYVTd20RhiOs9NaSBoEVmVeMLuhkTjUj1wp38Fsp5jm_U1EhCWE3R8ZjmBN_qvIgF-U8XAGhTGJSXGCK0k_MnvRUJakw1sVYN7uA",
+               "width" : 5312
+            }
+         ],
+         "place_id" : "ChIJ7dYj-ahOW4YR9CpbJzUobp4",
+         "plus_code" : {
+            "compound_code" : "6427+C3 Austin, Texas",
+            "global_code" : "86246427+C3"
+         },
+         "rating" : 4.5,
+         "reference" : "ChIJ7dYj-ahOW4YR9CpbJzUobp4",
+         "scope" : "GOOGLE",
+         "types" : [ "park", "point_of_interest", "establishment" ],
+         "vicinity" : "6301 W Slaughter Ln, Austin"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 30.2373311,
+               "lng" : -97.8915186
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 30.23878472989272,
+                  "lng" : -97.89046517010729
+               },
+               "southwest" : {
+                  "lat" : 30.23608507010727,
+                  "lng" : -97.89316482989273
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "efb9829974eaaba6ab513b096a3a9d5afd7eccd1",
+         "name" : "Windmill Run Park",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 2988,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103884111252669464414/photos\"\u003eJeff Crockett\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAqky4mbtn1tQnisw2kfMnY0rRptpBbe-9E4vvjV9_Bd6S_SK_i4h0zkfdPPzV6PV55JC2u47Oy3872_ta9cmG6BmaPdq7MRkNN2IbgQYjOXwtCIYcZxKtlMmlrAFWGWg_EhB5hSkc8jCw8e-MxLD6AI4xGhTB7JcPtReHDWIaatbgUQPygutqFw",
+               "width" : 5312
+            }
+         ],
+         "place_id" : "ChIJsfdtb3NJW4YRBKOsEYLvMU8",
+         "plus_code" : {
+            "compound_code" : "64P5+W9 Austin, Texas",
+            "global_code" : "862464P5+W9"
+         },
+         "rating" : 4.7,
+         "reference" : "ChIJsfdtb3NJW4YRBKOsEYLvMU8",
+         "scope" : "GOOGLE",
+         "types" : [ "park", "point_of_interest", "establishment" ],
+         "vicinity" : "8100 Kirkham Dr, Austin"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 30.3064174,
+               "lng" : -97.947198
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 30.30776722989272,
+                  "lng" : -97.9458481701073
+               },
+               "southwest" : {
+                  "lat" : 30.30506757010728,
+                  "lng" : -97.94854782989273
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "92b7c25618fa864727098b5a8f50a56a66cb5919",
+         "name" : "Bee Cave Sculpture Park",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3024,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100157140472726497814/photos\"\u003eCendy Prator\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAmqKsn2ytD32jiw7Hop1GjEhWhgu23lYx39zpGF_PRF5xiIWwBnDg_uRfwBgOiOc5mxmDAJQal8jiH4zvjqkc8NjZdKA_GceIocSphz5RvOeHVvVDdFmpm9_Le43h8S4_EhCfH2o286-scmuIX1d5qJB2GhTHlzev0n4JA2FBtcBwLA2Q1qWEIQ",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJU5lYru03W4YRD0Uk-f1m0zA",
+         "plus_code" : {
+            "compound_code" : "8343+H4 Bee Cave, Texas",
+            "global_code" : "86248343+H4"
+         },
+         "rating" : 4.5,
+         "reference" : "ChIJU5lYru03W4YRD0Uk-f1m0zA",
+         "scope" : "GOOGLE",
+         "types" : [ "park", "point_of_interest", "establishment" ],
+         "vicinity" : "13333 TX-71, Bee Cave"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 30.2080046,
+               "lng" : -97.91376
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 30.20909632989272,
+                  "lng" : -97.91244847010728
+               },
+               "southwest" : {
+                  "lat" : 30.20639667010728,
+                  "lng" : -97.91514812989273
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png",
+         "id" : "c2076c9873637621e716aa7adf69c7622ed2cb2c",
+         "name" : "Lewis Mountain Ranch Neighborhood Park",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJA8_mGihJW4YRtjhgLrRTGk0",
+         "plus_code" : {
+            "compound_code" : "635P+6F Lewis Mountain Ranch, Texas",
+            "global_code" : "8624635P+6F"
+         },
+         "rating" : 5,
+         "reference" : "ChIJA8_mGihJW4YRtjhgLrRTGk0",
+         "scope" : "GOOGLE",
+         "types" : [ "park", "point_of_interest", "establishment" ],
+         "vicinity" : "8206 Lewis Mountain Dr, Austin"
       }
 
+}
+
+response1 = JSON.parse(response); 
+		console.log("Place ID: " + response[0].photos.place_id);
+		console.log("Name: " + response[0].name);
+		console.log("Address: " + response[0].vicinity);
 
 
-	// --------------------------------------------------------------
+// --------------------------------------------------------------
+
+//Code to retrieve Active Park Locations
+
+		// At the initial load and subsequent value changes, get a snapshot of the stored data.
+		// This function allows you to update your page in real-time when the firebase database changes.
+	database.ref("/dogday").on("child_added", function (snapshot) {
+
+			// Set the variables equal to the stored values.
+		parkName = snapshot.val().parkName;
+		parkLocation = snapshot.val().parkLocation;
+		startTime = snapshot.val().startTime;
+		endTime = snapshot.val().endTime;
+		dogName = snapshot.val().dogName;
+		dogBreed = snapshot.val().dogBreed;
+		dogAge = snapshot.val().dogAge;
+
+// --------------------------------------------------------------
+
+	//code to get current time so that users with less then 15 min on the clock will be excluded
+
+		// Current Time
+	let currentTime = moment();
+	let currentTimeM = moment(currentTime).format("HH:mm a");
+	let currentTimeU = moment(currentTime).format("X");
+		console.log("Current M Time: " + currentTimeM);
+		console.log("Current U Time: " + currentTimeU);
+
+//Code to compare locations on list to Active Park List
+
+		// Start Time
+	startTime = moment(startTime, "hh:mm a")
+	startTimeU = moment(startTime, "X")
+		console.log("Start Time: " + startTime);
+
+		// End Time
+	endTime = moment(endTime, "hh:mm a")
+	endTimeU = moment(endTime, "X")
+		console.log("End Time: " + endTime);
+
+		//loop to go through every available park
+	for (let i = 4; i >= 0; i--) {
+
+			//loop to go through every active user
+		for (let j = ***OBJECTOFUSERS*** .length - 1; j >= 0; j--) {
+
+				//grabs the place_id of the current location 
+			let locationParks = ***results[i].photos.place_id***
+
+				//if the pulled location and and active location match then this triggers
+			if (locationParks === ***[j]parkLocation*** ) {
+
+					//if time hasn't expired on potential customer
+				if (currentTimeU <= endTimeU - 900) {
+					console.log("ACTIVE");
+
+						//function to print Active parks to the screen 
+					getLocationID("parkLocation");
+				}
+					//Code to delete expired users
+				else  {
+//***delete user object code goes here
+					console.log("Expired / Delete");
+			}
+				//if the the current pulled park is inactive then this prints it to the correct div
+			else {
+					//function to print Inactive parks to the screen 
+				getLocationZip("Zip");
+			};
+		};
+	}
+
+// --------------------------------------------------------------
 
 //Code to store the location picked by user.  
+	//RESEARCH THE UPDATE NOTATION FOR FIREBASE
 
 $(".parkbutton").on("click", function (event) {
 		event.preventDefault();
@@ -244,6 +487,20 @@ $(".parkbutton").on("click", function (event) {
 		});
 	});
 
+	const getLocationID = place_id => {
+		let queryURL = "____________place_id__________"
+		$.get(queryURL)
+
+			//we store the retrieved data in an object called Response
+		.then(response => {
+			console.log("Place ID: " + response.results[i].photos.place_id);
+			console.log("Name: " + response.results[i].name);
+			console.log("Address: " + response.results[i].vicinity);
+		});
+	}
+
+		//call function
+	getLocationID("place_id");
 
 //Code that presents links to that parks' Google Map / Google Locations page
 
@@ -288,123 +545,13 @@ $("#dogdaybutton").on("click", function (event) {
 
 //Code to factoids and pics of available dog. 
 
-		// --------------------------------------------------------------
-		// Calculate the minutes until arrival using hardcore math
-
-
-
-		// First Time
-		launchTime = moment(launchTime, "HH:mm")
-		console.log(launchTime);
-
-		//convert start time to unix time
-		let launchTimeM = moment(launchTime).format("HH:mm");
-		let launchTimeU = moment(launchTime).format("X");
-		console.log("Launch M Time: " + launchTimeM);
-		console.log("Launch U Time: " + launchTimeU);
-
-		if (launchTimeU < currentTimeU) {
-			console.log("SHIP ALREADY LAUNCHED!");
-
-			// Difference between the times
-			let timeDiff = moment().diff(moment(launchTime));
-			//console.log(timeDiff);
-			console.log("*How Long Ago U: " + moment(timeDiff).format("X"));
-			// Calculate the minutes till arrival: take the current time in unix subtract the lauch time 
-			let timeDiffU = currentTimeU - launchTimeU;
-			console.log("*How Long Ago U check: " + timeDiffU);
-
-			//convert duration to unix time
-			duration = parseInt(duration);
-			console.log(duration);
-			let durationU = duration * 60
-			console.log(durationU);
-			let durationUcheck = moment(durationU, 'X').format("m");
-			console.log("Duration check U: " + durationUcheck);
-
-			let durationMJS = duration * 60000
-			console.log(durationMJS);
-			let durationMJScheck = moment(durationMJS).format("m");
-			console.log("Duration check MJS: " + durationUcheck);
-
-			// find the modulus between the difference and the frequency.
-			let remainderTime = timeDiff % durationMJS;
-			let remainderTimeU = timeDiffU % durationU;
-			console.log("Remainder Time: " + remainderTime);
-			console.log("Remainder U Time: " + remainderTimeU);
-
-			//figure out ETA
-			eta = durationMJS - remainderTime;
-			//let etaU = durationU - remainderTimeU;
-			etaM = moment(new Date(eta)).format("m");
-			//let etaMU = etaU / 60;
-			//etaMU = Math.round(etaMU);
-			console.log("ETA: " + etaM);
-			//console.log("ETA U: " + etaMU);
-
-			// To calculate the arrival time, add the eta to the current time
-			nextArrival = moment().add(eta);
-			//nextArrivalU = moment().add(etaU);
-			nextArrivalM = moment(nextArrival).format("HH:mm")
-			console.log(nextArrivalM);
-
-		}
-
-		else {
-			console.log("SHIP NOT LAUNCHED YET!");
-
-			nextArrivalM = moment(launchTime).format("HH:mm");
-			console.log("*Will Launch on: " + nextArrivalM);
-
-			eta = currentTimeU - launchTimeU;
-			etaM = -1 * eta / 60;
-			etaM = Math.round(etaM);
-			console.log("*How Long to wait: " + etaM);
-
-		};
-
-		//console.log(starship);
-		//console.log(registery);
-		//console.log(starbase);
-		//console.log(duration);
-		//console.log(nextArrivalM);
-		//console.log("*How Long to wait: " + etaM);
-
-		let tableHtml = $("<tr>");
-		let shipHtml = $("<td>").text("USS " + snapshot.val().starship);
-		let registeryHtml = $("<td>").text("NCC-1" + snapshot.val().registery);
-		let starbaseHtml = $("<td>").text(snapshot.val().starbase);
-		let durationHtml = $("<td>").text(snapshot.val().duration + " Minutes");
-		let nextArrivalHtml = $("<td>").text(nextArrivalM);
-		let etaHtml = $("<td>").text(etaM + " Minutes");
-
-		tableHtml.append(shipHtml).append(registeryHtml).append(starbaseHtml).append(durationHtml).append(nextArrivalHtml).append(etaHtml);
-
-		$("#fleet").append(tableHtml);
 
 		// If any errors are experienced, log them to console.
 	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 	});
 
-	$("#reset").on("click", function (event) {
-		event.preventDefault();
-
-		let audioElement = document.createElement("audio");
-		audioElement.setAttribute("src", "assets/sound/restart.mp3");
-		audioElement.play();
-
-		setTimeout(function () {
-
-			window.location.reload(false);
-
-
-		}, 3000);
-
-
-	});
-
-});
+*/
 
 
 
