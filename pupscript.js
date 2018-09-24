@@ -17,8 +17,9 @@ id="dogdaybutton" for the submit button for the user's time and dog info
 
 id="start" for the inputed arrival time form
 id="end" for the inputed end time form
-id="dogName" for the name of dog form
-id="dogBreed" for the name of dog breed form
+id="dogName" for inputed name of dog form
+id="dogBreed" for inputed breed of dog breed form
+id="dogAge"for inputed age of dog breed form
 
 // --------------------------------------------------------------
 
@@ -149,11 +150,12 @@ let userLL = "bob";
 	   $.ajax({
 	       url: latLngUrl,
 	       method: 'GET',
-	       //***we store the retrieved data in an object called "result"
+	       //we store the retrieved data in an object called "result"
 	   }).done(function (parkList) {
-	   			//***Code to console log data of nearby parks
+				//Code to console log data of nearby parks
 	       	console.log(parkList);
-			    //test data extraction
+//***test data extraction
+// research https://codeburst.io/using-javascript-variables-as-object-keys-c191e2458fa3
 		    let name = parkList.results[1].geometry.name;
 		    console.log("Name of 2nd Park: ", name);
 
@@ -163,6 +165,7 @@ let userLL = "bob";
 
 	});
 	});
+
 
 //***Function to make Inactive Park List and present it
 
