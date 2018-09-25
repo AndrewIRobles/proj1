@@ -36,6 +36,15 @@ body{
     font-style: bold;
 }
 
+.weather{
+    text-align: center;
+    margin: auto;
+    background-color: #e9ecef;
+    color: rgb(34, 58, 58);
+    font-size: 32px;
+    font-style: bold;
+}
+
 .dot {
     height: 20rem;
     width: 20rem;
