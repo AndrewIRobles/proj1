@@ -91,9 +91,9 @@ $(document).ready(function () {
 			console.log("User's zip is " + zip);
 
 //*** temp zip to see if program runs.  Delete this to use form zip
-zip = 78736;
+//zip = 78736;
 
-	});
+
 
 // --------------------------------------------------------------
 
@@ -112,18 +112,31 @@ let userLL = "bob";
 	           url: url,
 	           method: 'GET',
 	       }).done(function (result) {
-	           console.log(result);	           
-               userLL = result.results[0].geometry.location;
-               console.log("User lat and long: ", userLL);
-              return userLL;
+	           	console.log(result);	           
+               	userLL = result.results[0].geometry.location;
+               	//userLL = JSON.stringify(userLL);
+               	console.log("User lat and long: ", userLL);
+
+				database.ref("/parks").set({
+					latLong: userLL
+				});
 
 	       }).fail(function (err) {
 	           throw err;
 	       });
-	       return userLL;
 	});
 
-    console.log("User lat and long 2: ", userLL);
+	database.ref("/parks").on("child_added", function (snapshot) {
+
+			// Set the variables equal to the stored values.
+		userLA = snapshot.val().lat;
+		userLO = snapshot.val().lng;
+
+
+console.log("This test start")
+    console.log(userLA);
+        console.log(userLO);
+ console.log("This test end")
 
 		// Once Longitude and Latitude are collected, use this call to find parks closest to your location:
 		// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LONGITUDE,LATITUDE&rtype=park&key=APIKEY&name=park&rankby=distance
@@ -131,7 +144,12 @@ let userLL = "bob";
 		// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.25208559999999,-97.9483898&rtype=park&key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&name=park&rankby=distance
 
 		//need to have these in the following format latitude,longitude
-	userLL="30.25208559999999,-97.9483898";
+	userLL= userLA +","+ userLO;
+			console.log(userLL);
+	// userLL = "30.267153,-97.7430608"
+	userLL = "30.25208559999999,-97.9483898";
+
+		console.log(userLL);
 		// Once Longitude and Latitude are collected, use this call to find parks closest to your location:
 		//***Generate key request for JSON object list of parks
 	let latLngUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
@@ -156,17 +174,21 @@ let userLL = "bob";
 	       	console.log(parkList);
 //***test data extraction
 // research https://codeburst.io/using-javascript-variables-as-object-keys-c191e2458fa3
-		    let name = parkList.results[1].geometry.name;
+		    let name = parkList.results[1].name;
 		    console.log("Name of 2nd Park: ", name);
-
+            return name;
 	   }).fail(function (e) {
 	       throw e;
 	   });
 
 	});
+
+
 	});
+});
 
-
+	});
+/*
 //***Function to make Inactive Park List and present it
 
 	function printInactiveParks (i) {
@@ -220,7 +242,7 @@ If a park exists, then collect the places ID. To retrieve a place by ID:
 https://maps.googleapis.com/maps/api/place/details/json?key=APIKEY=PLACEID
 Example:
 https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&placeid=ChIJsfdtb3NJW4YRBKOsEYLvMU8
-*/
+
 
 			//need to have these in the following format - this is example
 		place_id = "***ChIJA8_mGihJW4YRtjhgLrRTGk0***";

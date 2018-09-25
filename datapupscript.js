@@ -17,18 +17,46 @@ $(document).ready(function () {
 		// Create a variable to reference the database
 	let database = firebase.database();
 
-		// Set up variables
-	let zip = "";
-	let numberOfParks = 5;
-	let response = "";
-	let parkName = "";
-	let parkLocation = "";
-	let startTime = "";
-	let endTime = "";
-	let dogName = "";
-	let dogBreed = "";
-
 // --------------------------------------------------------------
+
+$("#dogdaybutton").on("click", function (event) {
+		event.preventDefault();
+
+		let parkName = $("#parkname").val().trim();
+		let parkLocation = $("#park_id").val().trim();
+		let startTime = $("#start").val().trim();
+		let endTime = $("#end").val().trim();
+		let dogName = $("#dogName").val().trim();
+		let dogBreed = $("#dogBreed").val().trim();
+		let dogAge = $("#dogAge").val().trim();
+
+			console.log("Park picked is " + parkName);
+			console.log("Start Location ID is " + parkLocation);
+			console.log("Start Time is " + startTime);
+			console.log("Start Time is " + endTime);
+			console.log("Dog Name is " + dogName);
+			console.log("Dog Breed is " + dogBreed);
+			console.log("Dog Age is " + dogAge);
+
+			// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
+		database.ref("/dogday").push({
+			parkName: parkName,
+			parkLocation: parkLocation,
+			startTime: startTime,
+			endTime: endTime,
+			dogName: dogName,
+			dogBreed: dogBreed,
+			dogBreed: dogAge
+		});
+
+		console.log(data.val());
+
+	});
+	// --------------------------------------------------------------
+
+//Code to factoids and pics of available dog. 
+
+		// If any errors are experienced, log them to console.
 
 		//Code to retrieve Active Park Locations
 		// At the initial load and subsequent value changes, get a snapshot of the stored data.
@@ -36,13 +64,24 @@ $(document).ready(function () {
 	database.ref("/dogday").on("child_added", function (snapshot) {
 
 			// Set the variables equal to the stored values.
-		parkName = snapshot.val().parkName;
-		parkLocation = snapshot.val().parkLocation;
-		startTime = snapshot.val().startTime;
-		endTime = snapshot.val().endTime;
-		dogName = snapshot.val().dogName;
-		dogBreed = snapshot.val().dogBreed;
-		dogAge = snapshot.val().dogAge;
+		parkNameD = snapshot.val().parkName;
+		parkLocationD = snapshot.val().parkLocation;
+		startTimeD = snapshot.val().startTime;
+		endTimeD = snapshot.val().endTime;
+		dogNameD = snapshot.val().dogName;
+		dogBreedD = snapshot.val().dogBreed;
+		dogAgeD = snapshot.val().dogAge;
+
+		console.log("Park picked is D " + parkNameD);
+		console.log("Start Location ID is D " + parkLocationD);
+		console.log("Start Time is D " + startTimeD);
+		console.log("Start Time is D " + endTimeD);
+		console.log("Dog Name is D " + dogNameD);
+		console.log("Dog Breed is D " + dogBreedD);
+		console.log("Dog Age is D " + dogAgeD);
+
+	});
+});
 
 /*
 // --------------------------------------------------------------
@@ -109,49 +148,8 @@ $(document).ready(function () {
 	//Try RETURNS function for comparing place IDs.  
 
 	//Code to collect data of new user and upload to Firebase
-$("#dogdaybutton").on("click", function (event) {
-		event.preventDefault();
 
-		parkName = $("#parkname").val().trim();
-		parkLocation = $("#park_id").val().trim();
 
-		startTime = $("#start").val().trim();
-		endTime = $("#end").val().trim();
-		dogName = $("#dogName").val().trim();
-		dogBreed = $("#dogBreed").val().trim();
-		dogAge = $("#dogAge").val().trim();
-
-			console.log("Park picked is " + parkName);
-			console.log("Start Location ID is " + parkLocation);
-			console.log("Start Time is " + startTime);
-			console.log("Start Time is " + endTime);
-			console.log("Dog Name is " + dogName);
-			console.log("Dog Breed is " + dogBreed);
-			console.log("Dog Age is " + dogAge);
-
-			// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
-		database.ref("/dogday").push({
-			parkName: parkName,
-			parkLocation: parkLocation,
-			startTime: startTime,
-			endTime: endTime,
-			dogName: dogName,
-			dogBreed: dogBreed,
-			dogBreed: dogAge
-		});
-
-		console.log(data.val());
-
-	// --------------------------------------------------------------
-
-//Code to factoids and pics of available dog. 
-
-		// If any errors are experienced, log them to console.
-	}, function (errorObject) {
-		console.log("The read failed: " + errorObject.code);
-	});
-	});
-});
 
 
 
