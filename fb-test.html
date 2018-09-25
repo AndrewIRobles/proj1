@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+    <title>test</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCReXH7G9fqpAGvccatlqbBf-FW0u0NB7c",
+            authDomain: "puppy-b6f53.firebaseapp.com",
+            databaseURL: "https://puppy-b6f53.firebaseio.com",
+            projectId: "puppy-b6f53",
+            storageBucket: "puppy-b6f53.appspot.com",
+            messagingSenderId: "75752689696"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+
+<body>
+    <h2>Weather call based on zip code</h2>
+
+    <form id="train-schedule">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Enter your zip code: </label>
+                    <input type="number" class="form-control" id="zip">
+                </div>
+            </div>
+        </div>
+        <button type="submit" id="submit" class="btn btn-info">Submit</button>
+    </form>
+
+    <br>
+    <br>
+
+    <div class="show">
+        <h3>Current temperature: </h3>
+        <p id="temp"></p>
+    </div>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=https://codeburst.io/using-javascript-variables-as-object-keys-c191e2458fa3&libraries=places"></script> -->
+    <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI">         </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="firebase.js"></script>
+</body>
+
+</html>
