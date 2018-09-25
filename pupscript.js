@@ -25,18 +25,27 @@ id="dogAge"for inputed age of dog breed form
 
 OUTLINE OF HOW CODE IS LAID OUT
 
+//Initialize Firebase
+
+//set up variables
+
+//function to print an Inactive Park to html
+
+//function to print an Active Park to html
+
+//function to retrieve a list of parks
+
 //Code to collect Zip Code
 
-//Code to pull addresses of nearby parks
+//Code to converts zip to Latitude and Longitude
+	// Calls function to convert that to Park List
 
 //Code to retrieve Active Park Locations
 
-//Code to compare locations on list to Active Park List
+//Code to retrieve current date and time
+
+//Code to compare Park List to Active Park List
 	//should exclude ones with less then 15 min on time?
-
-//Code to make Active Park List and present it
-
-//Code to make Inactive Park List and present it
 
 //Code to store the location picked by user.  
 	//with links to that parks' Google Map / Google Locations page
@@ -72,6 +81,7 @@ $(document).ready(function () {
 		// Set up variables
 	let zip = "";
 	let numberOfParks = 5;
+	let name = "";
 	let response = "";
 	let parkName = "";
 	let parkLocation = "";
@@ -82,123 +92,20 @@ $(document).ready(function () {
 
 // --------------------------------------------------------------
 
-		//Code to collect Zip Code
-		// Whenever a user clicks the submit button
-	$("#zipbutton").on("click", function (event) {
-		event.preventDefault();
-		zip = $("#zip").val().trim();
-		zip = parseInt(zip);
-			console.log("User's zip is " + zip);
-
-//*** temp zip to see if program runs.  Delete this to use form zip
-//zip = 78736;
-
-
-
-// --------------------------------------------------------------
-
-//***code to create request to google locations.  
-
-let userLL = "bob";
-
-		//Generate key request for Latitude and Longitude
-	let url = "https://maps.googleapis.com/maps/api/geocode/json";
-	url += '?' + $.param({
-	   'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
-	   'address': "zip"
-	});
-	$(document).ready(function () {
-	       $.ajax({
-	           url: url,
-	           method: 'GET',
-	       }).done(function (result) {
-	           	console.log(result);	           
-               	userLL = result.results[0].geometry.location;
-               	//userLL = JSON.stringify(userLL);
-               	console.log("User lat and long: ", userLL);
-
-				database.ref("/parks").set({
-					latLong: userLL
-				});
-
-	       }).fail(function (err) {
-	           throw err;
-	       });
-	});
-
-	database.ref("/parks").on("child_added", function (snapshot) {
-
-			// Set the variables equal to the stored values.
-		userLA = snapshot.val().lat;
-		userLO = snapshot.val().lng;
-
-
-console.log("This test start")
-    console.log(userLA);
-        console.log(userLO);
- console.log("This test end")
-
-		// Once Longitude and Latitude are collected, use this call to find parks closest to your location:
-		// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LONGITUDE,LATITUDE&rtype=park&key=APIKEY&name=park&rankby=distance
-		// Example:
-		// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.25208559999999,-97.9483898&rtype=park&key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&name=park&rankby=distance
-
-		//need to have these in the following format latitude,longitude
-	userLL= userLA +","+ userLO;
-			console.log(userLL);
-	// userLL = "30.267153,-97.7430608"
-	userLL = "30.25208559999999,-97.9483898";
-
-		console.log(userLL);
-		// Once Longitude and Latitude are collected, use this call to find parks closest to your location:
-		//***Generate key request for JSON object list of parks
-	let latLngUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-	latLngUrl += '?' + $.param({
-	   'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
-	   		//your long/lat go here
-	   'location': userLL,
-	   'rtype': "park",
-	   'rankby': "distance",
-	   'name': "park"
-	});
-
-	console.log(latLngUrl);
-
-	$(document).ready(function () {
-	   $.ajax({
-	       url: latLngUrl,
-	       method: 'GET',
-	       //we store the retrieved data in an object called "result"
-	   }).done(function (parkList) {
-				//Code to console log data of nearby parks
-	       	console.log(parkList);
-//***test data extraction
-// research https://codeburst.io/using-javascript-variables-as-object-keys-c191e2458fa3
-		    let name = parkList.results[1].name;
-		    console.log("Name of 2nd Park: ", name);
-            return name;
-	   }).fail(function (e) {
-	       throw e;
-	   });
-
-	});
-
-
-	});
-});
-
-	});
-/*
 //***Function to make Inactive Park List and present it
 
 	function printInactiveParks (i) {
 
-		console.log("Inactive Place ID: " + ***parkList.results[i].photos.place_id***);
-		console.log("Inactive Name: " + ***parkList.results[i].name***);
-		console.log("Inactive Address: " + ***parkList.results[i].vicinity***);
+			//report which the index number of the current park
+		console.log("Park Index #: " + i);
 
-      		// Grabbing the name data
-      	let name = ***results[i].name***;
+//***grab and console log out Place ID of park
+   //  	place_id = result.results[i].place_id;
+			// console.log("Inactive Place ID: " + place_id);
+
+//***grab and console log out name of park
+      	name = result.results[i].name;
+      			console.log("Inactive Place ID: " + name);
 		  	// Then dynamically generating buttons for each movie in the array
 		  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           	// Creating an element to have the name displayed
@@ -212,9 +119,9 @@ console.log("This test start")
 			//Adding the button to the buttons-view div
   		$("#inactive").append(parkName);
 
-      		// Grabbing the address data
-      	let address = ***results[i].vicinity***;
-//***with links to that parks' Google Map / Google Locations page
+//***Grabbing and console logging the address data
+      	let address = result.results[i].vicinity;
+      	    console.log("Inactive Park Address: " + address);
           	// Creating an element to have the name displayed
       	let addressOut = $("<p>");
 		  	// Adding a data-attribute
@@ -223,18 +130,25 @@ console.log("This test start")
 		addressOut.text(address);
 			//Adding the button to the buttons-view div
   		$("#inactive").append(addressOut);
-  			//get the place_id
-      	let place_id = ***results[i].place_id***;
+
+//***grab and console log out Place ID of park
+      	let place_id = result.results[i].place_id;
+      	    console.log(place_id);
 		  	// Adding a data-attribute
 		place_id.attr("data-ID", place_id);
 		$("#inactive").append(place_id);
-	};  		
-
 
 //***with links to that parks' Google Map / Google Locations page??
 
-		//***Function to make Active Park and present it
+	};  		
+
+	// --------------------------------------------------------------
+
+//***Function to make Active Park and present it
+	//input needs to have these in the following format "ChIJA8_mGihJW4YRtjhgLrRTGk0"
 	function printActivePark (place_id) {
+			//console log the place_id
+		console.log(place_id);
 
 /*
 3rd call:
@@ -242,11 +156,9 @@ If a park exists, then collect the places ID. To retrieve a place by ID:
 https://maps.googleapis.com/maps/api/place/details/json?key=APIKEY=PLACEID
 Example:
 https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&placeid=ChIJsfdtb3NJW4YRBKOsEYLvMU8
+*/
 
-
-			//need to have these in the following format - this is example
-		place_id = "***ChIJA8_mGihJW4YRtjhgLrRTGk0***";
-			//***Generate key request for JSON object list of parks
+//***Generate key request for JSON object list of parks
 		let parkIDUrl = "***";
 		parkIDUrl += '?' + $.param({
 		   'key': " *** ",
@@ -260,22 +172,15 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
 		       method: 'GET',
 		       //***we store the retrieved data in an object called "result"
 		   	}).done(function (activePark) {
-		   			//***Code to console log data of nearby parks
+
+					//test data extraction
+					//***Code to console log data of nearby parks
 		       	console.log(activePark);
-				    //test data extraction
-			    let name = activePark.results[0].geometry.name;
-			    console.log("Name of Active Park: ", name);
 
-			   }).fail(function (e) {
-			       throw e;
-			   });
-
-				console.log("Active Name: " + ***activePark[0].results.name***);
-				console.log("Active Address: " + ***activePark[0].results.vicinity***);
-
-		      		// Grabbing the name data
-		      	let name = ***activePark[0].results[i].name***;
-				  	// Then dynamically generating buttons for each movie in the array
+		            //grab and console log out name of park 
+				let name = activePark.results[0].name;
+		    		console.log("Name of Active Park: ", name);
+					// Then dynamically generating buttons for each movie in the array
 				  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
 		          	// Creating an element to have the name displayed
 		      	let parkName = $("<button>");
@@ -287,34 +192,127 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
 				parkName.text(name);
 					//Adding the button to the buttons-view div
 		  		$("#active").append(parkName);
-		      		// Grabbing the address data
-		      	let address = ***activePark[0].results[i].vicinity***;
+
+		    		 //grab and console log out Address of park
+		    	address = activePark.results[0].vicinity;
+		    		console.log("Active Address: ", address);
 				  	// Then dynamically generating buttons for each movie in the array
 				  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
 		          	// Creating an element to have the name displayed
 		      	let addressOut = $("<p>");
-//***with links to that parks' Google Map / Google Locations page
 				  	// Adding a data-attribute
 				addressOut.attr("data-address", address);
 				  	// Providing the initial button text
 				addressOut.text(address);
 					//Adding the button to the buttons-view div
 		  		$("#active").append(addressOut);
-		  		  	//get the place_id
-      			let place_id = ***results[i].place_id***;
+
 		  			// Adding a data-attribute
 				place_id.attr("data-ID", place_id);
 				$("#active").append(place_id);
-		};
+
+//***with links to that parks' Google Map / Google Locations page
+
+			   	}).fail(function (e) {
+			       throw e;
+			   	});
+		});
 	};
+
+//------------- PARK LIST Function START  --------------------------/
+
+		// Once Longitude and Latitude are collected, use this function to find parks closest to your location:
+function parkList (latlong){
+		//Generate key request for JSON object list of parks
+    let latLngUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+    latLngUrl += '?' + $.param({
+       'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+       'location': latlong,//your long/lat go here
+       'rtype': "park",
+       'rankby': "distance",
+       'name': "park"
+    }); 
+
+    $.ajax({
+        url: latLngUrl,
+        method: 'GET',   
+        async: true,
+            //we store the retrieved data in an object called "result"
+    }).done(function (result) {	  
+        console.log("our url to send to places is "+ latLngUrl);
+        	//Code to console log data of nearby parks
+        console.log(result);
+
+            //grab and console log out name of park #2 as a test
+		let name = result.results[1].name;
+    		console.log(name);
+    		//grab and console log out Place ID of park #2 as a test
+    	place_id = result.results[1].place_id;
+    		console.log(place_id);
+    		 //grab and console log out Address of park #2 as a test
+    	address = result.results[1].vicinity;
+    		console.log(address);
+
+		let i=2;
+		console.log("Inactive Place ID: " + result.results[i].place_id);
+		printInactiveParks(i);
+
+    		//Input Park List into Firebase so we can access it easier??  
+		database.ref("/parks").set({
+			parkListObject: result
+		});
+
+//***parse results or loop through results and render map      
+
+    }).fail(function (err) {
+        throw err;
+    });
+}
+
+//----- PARK LIST END  -----------------------------/
+
+//--CODE TO TAKE ZIP AND FIND LAT AND LONG AND TRIGGER SUBEQUENT STUFF-------/
+
+		//Setting up URL for ZIPCODE
+		//Code to collect Zip Code whenever a user clicks the submit button  
+    $("#zipbutton").on("click", function (zip){
+            zip.preventDefault(); 
+            let zipInput = $("#zip").val().trim();
+				//code to create request to google locations and Generate key request for Latitude and Longitude
+            let url = "https://maps.googleapis.com/maps/api/geocode/json";
+            url += '?' + $.param({
+               'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+               'address': zipInput,
+               'async': true
+        
+            });
+	       $.ajax({
+	           url: url,
+               method: 'GET',   
+               async: true,
+	       }).done(function (result) {
+	       			//Latitude and Longitude results!
+               	userLL = result.results[0].geometry.location.lat+","+result.results[0].geometry.location.lng;
+               console.log("User lat and long: ",userLL)
+
+					// Once Longitude and Latitude are collected, use this function (from above) to find parks closest to your location:
+		        parkList(userLL);
+
+	       }).fail(function (err) {
+	           throw err;
+	       });
+          // return userLL;
+         
+	});
+
+
 
 
 
 // --------------------------------------------------------------
 
 		//Code to retrieve Active Park Locations
-		// At the initial load and subsequent value changes, get a snapshot of the stored data.
-		// This function allows you to update your page in real-time when the firebase database changes.
+		// At the initial load and subsequent value changes, get a snapshot of the stored data.  This function allows you to update your page in real-time when the firebase database changes.
 	database.ref("/dogday").on("child_added", function (snapshot) {
 
 			// Set the variables equal to the stored values.
@@ -326,16 +324,30 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
 		dogBreed = snapshot.val().dogBreed;
 		dogAge = snapshot.val().dogAge;
 
+			console.log("Park picked is " + parkName);
+			console.log("Start Location ID is " + parkLocation);
+			console.log("Start Time is " + startTime);
+			console.log("End Time is " + endTime);
+			console.log("Dog Name is " + dogName);
+			console.log("Dog Breed is " + dogBreed);
+			console.log("Dog Age is " + dogAge);
+
+	}); // ENDS database /dogday retrieval 
+
 // --------------------------------------------------------------
 
 	//code to get current time so that users with less then 15 min on the clock will be excluded
 
 		// Current Time
 	let currentTime = moment();
-	let currentTimeM = moment(currentTime).format("HH:mm a");
+	let currentTimeM = moment(currentTime).format("MM DD HH:mm a");
 	let currentTimeU = moment(currentTime).format("X");
-		console.log("Current M Time: " + currentTimeM);
-		console.log("Current U Time: " + currentTimeU);
+		console.log("Current Time: " + currentTimeM);
+		console.log("Current Unix Time (sec): " + currentTimeU);
+
+}); // ENDS doc.ready
+
+/*
 
 //***Code to compare locations on list to Active Park List
 

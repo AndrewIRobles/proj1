@@ -46,7 +46,7 @@ $("#dogdaybutton").on("click", function (event) {
 			endTime: endTime,
 			dogName: dogName,
 			dogBreed: dogBreed,
-			dogBreed: dogAge
+			dogAge: dogAge
 		});
 
 		console.log(data.val());
