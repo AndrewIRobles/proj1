@@ -51,7 +51,7 @@ OUTLINE OF HOW CODE IS LAID OUT
 */
 
 	//load Jqery stuff
-$(document).ready(function () {
+
 
 		// Initialize Firebase
 	let config = {
@@ -66,8 +66,44 @@ $(document).ready(function () {
 	firebase.initializeApp(config);
 
 		// Create a variable to reference the database
-	let database = firebase.database();
+  let database = firebase.database();
+  
+$(document).ready(function () {
 
+  $('#pagetwo').addClass("hide");
+  $('#pageone').removeClass("hide");
+  $("#page4").addClass("hide");
+  $("#page3").addClass("hide");
+  
+  zipSearch = $("#zipbutton").on('click', function(e) {
+      $('#pageone').addClass("hide");
+      $('#pagetwo').removeClass("hide");
+  });
+  
+  console.log(zipSearch);
+
+  puppiedPark = $("#view-park-2").on('click', function(e) {
+      $('#pagetwo').addClass("hide");
+      $('#page3').removeClass("hide");
+  });
+   
+      
+      $("#add-pup-2").on('click', function(e){
+          console.log("event click: ", e);
+          $('#pagetwo').addClass("hide");
+          $("#page3").addClass("hide");
+          $("#page4").removeClass("hide");
+      
+      });
+      $("#add-pup-3").on('click', function(e){
+          console.log("event click: ", e);
+          $('#pagetwo').addClass("hide");
+          $("#page3").addClass("hide");
+          $("#page4").removeClass("hide");
+      
+      });
+      });
+      
 		// Set up variables
 	let zip = "";
 	let response = "";

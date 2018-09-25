@@ -1,8 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two');
 
+h1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 body{
     width: 97%;
     background-image: url("../images/mural-dog.jpeg");
+}
+
+.nearYou{
+    text-align: center;
+    margin: auto;
+    background-color: #e9ecef;
+    color: rgb(34, 58, 58);
+    font-size: 32px;
+    font-style: bold;
+}
+
+.jumbotron-fluid{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newParty{
+    text-align: center;
+    margin: auto;
+    background-color: #e9ecef;
+    color: rgb(34, 58, 58);
+    font-size: 32px;
+    font-style: bold;
 }
 
 .dot {
