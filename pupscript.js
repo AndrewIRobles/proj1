@@ -334,25 +334,31 @@ function parkList (latlong){
 
 	}); // ENDS database /dogday retrieval 
 
-// --------------------------------------------------------------
-
-	//code to get current time so that users with less then 15 min on the clock will be excluded
+// -----Code to get current time --------------------------------------------
 
 		// Current Time
 	let currentTime = moment();
-	let currentTimeM = moment(currentTime).format("MM DD HH:mm a");
+	let currentTimeM = moment(currentTime).format("MM DD hh:mm a");
 	let currentTimeU = moment(currentTime).format("X");
 		console.log("Current Time: " + currentTimeM);
 		console.log("Current Unix Time (sec): " + currentTimeU);
 
 }); // ENDS doc.ready
 
-/*
 
-//***Code to compare locations on list to Active Park List
+
+
+
+
+//---------------Compare Lists Function -------------------------
+
+//***function to compare locations on list to Active Park List
+function listCompare () {
+
+//code to pull the start time and end time for a user out of Firebase
 
 		// Start Time
-	startTime = moment(startTime, "hh:mm a")
+	startTime = moment(startTime, "MM DD hh:mm a")
 	startTimeU = moment(startTime, "X")
 		console.log("Start Time: " + startTime);
 
@@ -366,6 +372,8 @@ function parkList (latlong){
 
 			//loop to go through every active user
 		for (let j = 0; j <= ***OBJECTOFUSERS*** .length;; j++) {
+
+//(so that users with less then 15 min on the clock will be excluded)
 
 				//grabs the place_id of the current location 
 			let locationPark = ***results[i].photos.place_id***
@@ -392,7 +400,8 @@ function parkList (latlong){
 				printInactiveParks(i);
 			};
 		};
-	}
+		}
+};
 
 // --------------------------------------------------------------
 
