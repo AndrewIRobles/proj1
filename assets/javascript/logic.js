@@ -49,8 +49,117 @@ $(document).ready(function(){
             $("#page4").removeClass("hide");
         
         });
+
+        //set up variables
+        let zip = "";
+	let numberOfParks = 5;
+	let response = "";
+	let parkName = "";
+	let parkLocation = "";
+	let startTime = "";
+	let endTime = "";
+	let dogName = "";
+    let dogBreed = "";
+    
+    // --------------------------------------------------------------
+
+    $("#dogdaybutton").on("click", function (event) {
+		event.preventDefault();
+
+		let parkName = $("#parkname").val().trim();
+		let parkLocation = $("#park_id").val().trim();
+		let startTime = $("#start").val().trim();
+		let endTime = $("#end").val().trim();
+		let dogName = $("#dogName").val().trim();
+		let dogBreed = $("#dogBreed").val().trim();
+		let dogAge = $("#dogAge").val().trim();
+
+			console.log("Park picked is " + parkName);
+			console.log("Start Location ID is " + parkLocation);
+			console.log("Start Time is " + startTime);
+			console.log("Start Time is " + endTime);
+			console.log("Dog Name is " + dogName);
+			console.log("Dog Breed is " + dogBreed);
+			console.log("Dog Age is " + dogAge);
+
+			// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
+		database.ref("/dogday").push({
+			parkName: parkName,
+			parkLocation: parkLocation,
+			startTime: startTime,
+			endTime: endTime,
+			dogName: dogName,
+			dogBreed: dogBreed,
+			dogAge: dogAge
+		});
+
+		console.log(data.val());
+
+	});
+	// --------------------------------------------------------------
+		//Code to retrieve Active Park Locations
+		// At the initial load and subsequent value changes, get a snapshot of the stored data.
+		// This function allows you to update your page in real-time when the firebase database changes.
+        database.ref("/dogday").on("child_added", function (snapshot) {
+
+			// Set the variables equal to the stored values.
+		parkNameD = snapshot.val().parkName;
+		parkLocationD = snapshot.val().parkLocation;
+		startTimeD = snapshot.val().startTime;
+		endTimeD = snapshot.val().endTime;
+		dogNameD = snapshot.val().dogName;
+		dogBreedD = snapshot.val().dogBreed;
+		dogAgeD = snapshot.val().dogAge;
+
+		console.log("Park picked is D " + parkNameD);
+		console.log("Start Location ID is D " + parkLocationD);
+		console.log("Start Time is D " + startTimeD);
+		console.log("Start Time is D " + endTimeD);
+		console.log("Dog Name is D " + dogNameD);
+		console.log("Dog Breed is D " + dogBreedD);
+		console.log("Dog Age is D " + dogAgeD);
+
+	});
+});
+
+
+// --------------------------------------------------------------
+	//code to get current time so that users with less then 15 min on the clock will be excluded
+		// Current Time
+	let currentTime = moment();
+	let currentTimeM = moment(currentTime).format("HH:mm a");
+	let currentTimeU = moment(currentTime).format("X");
+		console.log("Current M Time: " + currentTimeM);
+		console.log("Current U Time: " + currentTimeU);
+//***Code to compare locations on list to Active Park List
+		// Start Time
+	startTime = moment(startTime, "hh:mm a")
+	startTimeU = moment(startTime, "X")
+		console.log("Start Time: " + startTime);
+		// End Time
+	endTime = moment(endTime, "hh:mm a")
+	endTimeU = moment(endTime, "X")
+		console.log("End Time: " + endTime);
+
+
+		//Code to collect Zip Code
+		// Whenever a user clicks the submit button
+	$("#zipbutton").on("click", function (event) {
+		event.preventDefault();
+		zip = $("#zip").val().trim();
+		zip = parseInt(zip);
+			console.log("User's zip is " + zip);
+
+//*** temp zip to see if program runs.  Delete this to use form zip
+zip = 78736;
+
+    });
+    
+    
         
+    
         
+    //WEATHER    
 
      let zipAdded = false;
      console.log("zip added? ", zipAdded);
@@ -82,7 +191,7 @@ $(document).ready(function(){
      $("#zip").val("");
 
    }); 
-    }); //ENDS on("click", fn(e))
+     //ENDS on("click", fn(e))
        // Code to retrieve Active Park Locations
 
         // At the initial load and subsequent value changes, get a snapshot of the stored data.
