@@ -94,7 +94,7 @@ $(document).ready(function () {
 
 //***Function to make Inactive Park List and present it
 
-	function printInactiveParks (i) {
+	function printInactiveParks (i, result) {
 
 			//report which the index number of the current park
 		console.log("Park Index #: " + i);
@@ -105,7 +105,7 @@ $(document).ready(function () {
 
 //***grab and console log out name of park
       	name = result.results[i].name;
-      			console.log("Inactive Place ID: " + name);
+      			console.log("Inactive Place ID: " + result.results[i].name);
 		  	// Then dynamically generating buttons for each movie in the array
 		  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           	// Creating an element to have the name displayed
@@ -119,6 +119,13 @@ $(document).ready(function () {
 			//Adding the button to the buttons-view div
   		$("#inactive").append(parkName);
 
+//***grab and console log out Place ID of park
+      	let place_id = result.results[i].place_id;
+      	    console.log(place_id);
+		  	// Adding a data-attribute
+		parkName.attr("data-ID", place_id);
+		$("#inactive").append(place_id);
+
 //***Grabbing and console logging the address data
       	let address = result.results[i].vicinity;
       	    console.log("Inactive Park Address: " + address);
@@ -131,12 +138,7 @@ $(document).ready(function () {
 			//Adding the button to the buttons-view div
   		$("#inactive").append(addressOut);
 
-//***grab and console log out Place ID of park
-      	let place_id = result.results[i].place_id;
-      	    console.log(place_id);
-		  	// Adding a data-attribute
-		place_id.attr("data-ID", place_id);
-		$("#inactive").append(place_id);
+
 
 //***with links to that parks' Google Map / Google Locations page??
 
@@ -255,7 +257,7 @@ function parkList (latlong){
 
 		let i=2;
 		console.log("Inactive Place ID: " + result.results[i].place_id);
-		printInactiveParks(i);
+		printInactiveParks(i, result);
 
     		//Input Park List into Firebase so we can access it easier??  
 		database.ref("/parks").set({
@@ -306,7 +308,8 @@ function parkList (latlong){
 	});
 
 
-
+}); // ENDS doc.ready
+/*
 
 
 // --------------------------------------------------------------
@@ -332,7 +335,15 @@ function parkList (latlong){
 			console.log("Dog Breed is " + dogBreed);
 			console.log("Dog Age is " + dogAge);
 
+		// Start Time
+	startTime = moment(startTime, "HH:mm a");
+	startTimeU = moment(startTime, "X");
+		console.log("Start Time: " + startTime);
+
 	}); // ENDS database /dogday retrieval 
+
+
+/*
 
 // -----Code to get current time --------------------------------------------
 
@@ -342,11 +353,6 @@ function parkList (latlong){
 	let currentTimeU = moment(currentTime).format("X");
 		console.log("Current Time: " + currentTimeM);
 		console.log("Current Unix Time (sec): " + currentTimeU);
-
-}); // ENDS doc.ready
-
-
-
 
 
 
