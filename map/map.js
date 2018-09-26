@@ -1,21 +1,26 @@
-var map;
+let map;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 30.2672, lng: -97.7431},
-    zoom: 8
+    zoom: 8,
+    disableDefaultUI: true,
   });
-}
-
+  var marker = new google.maps.Marker({
+    position: {lat:31.2672, lng: -97.7431},
+    map: map,
+    title: 'Hello World!'
+  });
+}; // ENDS initMap
 
 //---------------------------------------------------------------------------------- PARK LIST Function START  --------------------------------------------------------------------//
 
 		// Once Longitude and Latitude are collected, use this function to find parks closest to your location:
-    function parkList (latlong){
+    function parkList (userLL){
       //Generate key request for JSON object list of parks
       let latLngUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
       latLngUrl += '?' + $.param({
          'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
-         'location': latlong,//your long/lat go here
+         'location': userLL,//your long/lat go here
          'rtype': "park",
          'rankby': "distance",
          'name': "park"
@@ -85,5 +90,44 @@ function initMap() {
         throw err;
       }); // ENDS fn(err)
 
-
   }); // ENDS zip button on click fn
+
+
+
+
+
+  //-----------------------------------------------------------------markers-----------------------------------------------------//
+  
+  //    // This event listener calls addMarker() when the map is clicked.
+//    google.maps.event.addListener(map, 'click', function(event) {
+//     addMarker(event.latLng, map);
+//   });
+
+//   // Add a marker at the center of the map.
+//   addMarker(bangalore, map);
+
+// // Adds a marker to the map.
+// function addMarker(location, map) {
+//   // Add the marker at the clicked location, and add the next-available label
+//   // from the array of alphabetical characters.
+//   var marker = new google.maps.Marker({
+//     position: location,
+//     label: labels[labelIndex++ % labels.length],
+//     map: map
+//   });
+// } // ENDS addMarker fn
+
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+
+  
+  //-----------------------------------------------------another way to render map----------------------------------------------// 
+  // function myMap() {
+  //   var mapCanvas = document.getElementById("map");
+  //   var mapOptions = {
+  //     center: new google.maps.LatLng(30.2672, -97.7431),
+  //     zoom: 8,
+  //     disableDefaultUI: true,
+  //   };
+  //   var map = new google.maps.Map(mapCanvas, mapOptions);
+  // }
