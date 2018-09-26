@@ -2,7 +2,7 @@
 let database = firebase.database();
 let userLL;
 let address;
-var count=0;
+let count=0;
 $(document).ready(function() {
 
 
