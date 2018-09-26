@@ -29,7 +29,7 @@
         <div class="row zipCode">
             <div class="col-xs-3"></div>
             <div class="input-group mb-3 col-xs-8">
-                <input type="number" class="form-control" id="zip" placeholder="Zip Code" >
+                <input type="number" class="form-control" id="zip" placeholder="Zip Code">
                 <div class="input-group-append">
                     <button class="btn" type="button" id="zipbutton">Go!</button>
                 </div>
@@ -67,20 +67,7 @@
             </div>
         </header>
         <div class="row">
-            <div class="col-sm">
-                <div class="form-group">
-                    <label for="start-party">Pick a Park...</label>
-                    <select class="form-control" id="inactive">
-                        <option>This Park</option>
-                        <option>That Park</option>
-                        <option>The Other Park</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row btnRow">
-                <div class="col-sm add-dog">
-                    <button type="submit" class="btn" id="add-pup-2">Add a pup!</button>
-                </div>
+            <div class="col-sm" id="inactive">
             </div>
         </div>
     </div>
@@ -120,21 +107,21 @@
                             <td>4</td>
                             <td>Jack Russle</td>
                             <td>12:45pm</td>
-                            <td class="time">45 min</td>
+                            <td class="time">1:45</td>
                         </tr>
                         <tr>
                             <td>Nara</td>
                             <td>5</td>
                             <td>Mutt</td>
                             <td>10am</td>
-                            <td class="time">65 min</td>
+                            <td class="time">12pm</td>
                         </tr>
                         <tr>
                             <td>Rambo</td>
                             <td>5</td>
                             <td>German Shepard</td>
                             <td>6:30pm</td>
-                            <td class="time">45 min</td>
+                            <td class="time">8:00pm</td>
                         </tr>
                     </tbody>
                 </table>
@@ -164,31 +151,26 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label>What's you pet's name?</label>
-                        <input type="text" class="form-control" id="pet-name" placeholder="Ex: Fido">
+                        <input type="text" class="form-control" id="dogName" placeholder="Ex: Fido">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label>How old is your pet?</label>
-                        <input type="text" class="form-control" id="age" placeholder="Ex: 4 years">
+                        <input type="text" class="form-control" id="dogAge" placeholder="Ex: 4 years">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="dog-breed">What is your dog's breed?</label>
-                        <select class="form-control" id="dog-breed">
-                            <option>Lab</option>
-                            <option>Pit Bull</option>
-                            <option>Poodle</option>
-                            <option>Beagle</option>
-                            <option>Great Dane</option>
-                        </select>
+                        <input type="text" class="form-control" id="dogBreed" placeholder="Ex: Beagle, Mutt, etc.">
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label>How long will you stay and play?</label>
-                        <input type="number" class="form-control" id="length" placeholder="90 minutes">
+                        <input type="text" class="form-control" id="startTime" placeholder="Start Time (HH:mm military time)">
+                        <input type="text" class="form-control" id="endTime" placeholder="End Time (HH:mm military time">
                     </div>
                 </div>
             </div>
@@ -202,7 +184,8 @@
 
     </div>
     <!-- google api's -->
-    <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI"></script>
+    <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&librares=places">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI"></script>
     <!-- jquery link -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

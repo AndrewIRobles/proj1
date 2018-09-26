@@ -50,6 +50,14 @@ $(document).ready(function(){
         
         });
 
+        $("#submit").on('click', function(e){
+            e.preventDefault();
+            console.log("event click: ", e);
+            $('#page4').addClass("hide");
+            $('#page3').removeClass("hide");
+
+        });
+
         //set up variables
         let zip = "";
 	let numberOfParks = 5;
@@ -60,9 +68,94 @@ $(document).ready(function(){
 	let endTime = "";
 	let dogName = "";
     let dogBreed = "";
+
+    function parkList (latlong){
+		//Generate key request for JSON object list of parks
+    let latLngUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+    latLngUrl += '?' + $.param({
+       'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+       'location': latlong,//your long/lat go here
+       'rtype': "park",
+       'rankby': "distance",
+       'name': "park"
+    }); 
+
+    $.ajax({
+        url: latLngUrl,
+        method: 'GET',   
+        async: true,
+            //we store the retrieved data in an object called "result"
+    }).done(function (result) {	  
+        console.log("our url to send to places is "+ latLngUrl);
+        	//Code to console log data of nearby parks
+        console.log(result);
+
+            //grab and console log out name of park #2 as a test
+		let name = result.results[1].name;
+    		console.log(name);
+    		//grab and console log out Place ID of park #2 as a test
+    	place_id = result.results[1].place_id;
+    		console.log(place_id);
+    		 //grab and console log out Address of park #2 as a test
+    	address = result.results[1].vicinity;
+    		console.log(address);
+
+		let i=2;
+		console.log("Inactive Place ID: " + result.results[i].place_id);
+		printInactiveParks(i, result);
+
+    		//Input Park List into Firebase so we can access it easier??  
+		database.ref("/parks").set({
+			parkListObject: result
+		});
+
+//***parse results or loop through results and render map      
+
+    }).fail(function (err) {
+        throw err;
+    });
+}
     
     // --------------------------------------------------------------
+//***Function to make Inactive Park List and present it
 
+function printInactiveParks (i, result) {
+
+    //report which the index number of the current park
+console.log("Park Index #: " + i);
+
+//***grab and console log out Place ID of park
+//  	place_id = result.results[i].place_id;
+    // console.log("Inactive Place ID: " + place_id);
+
+//***grab and console log out name of park
+  name = result.results[i].name;
+          console.log("Inactive Place ID: " + result.results[i].name);
+      // Then dynamically generating buttons for each movie in the array
+      // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+      // Creating an element to have the name displayed
+  let parkName = $("<button>");
+        // Adding a class of movie-btn to our button
+    parkName.addClass("parkbutton");
+    parkName.addClass("btn");
+      // Adding a data-attribute
+parkName.attr("data-name", name);
+      // Providing the initial button text
+parkName.text(name);
+    //Adding the button to the buttons-view div
+  $("#inactive").append(parkName);
+
+//***grab and console log out Place ID of park
+  let place_id = result.results[i].place_id;
+      console.log(place_id);
+      // Adding a data-attribute
+parkName.attr("data-ID", place_id);
+
+
+
+
+
+//adding pup info
     $("#dogdaybutton").on("click", function (event) {
 		event.preventDefault();
 
@@ -120,7 +213,7 @@ $(document).ready(function(){
 		console.log("Dog Age is D " + dogAgeD);
 
 	});
-});
+};
 
 
 // --------------------------------------------------------------
@@ -131,7 +224,7 @@ $(document).ready(function(){
 	let currentTimeU = moment(currentTime).format("X");
 		console.log("Current M Time: " + currentTimeM);
 		console.log("Current U Time: " + currentTimeU);
-//***Code to compare locations on list to Active Park List
+
 		// Start Time
 	startTime = moment(startTime, "hh:mm a")
 	startTimeU = moment(startTime, "X")
@@ -144,14 +237,29 @@ $(document).ready(function(){
 
 		//Code to collect Zip Code
 		// Whenever a user clicks the submit button
-	$("#zipbutton").on("click", function (event) {
-		event.preventDefault();
-		zip = $("#zip").val().trim();
-		zip = parseInt(zip);
-			console.log("User's zip is " + zip);
+        $("#zipbutton").on("click", function (zip){
+            zip.preventDefault(); 
+            let zipInput = $("#zip").val().trim();
 
-//*** temp zip to see if program runs.  Delete this to use form zip
-zip = 78736;
+            let url = "https://maps.googleapis.com/maps/api/geocode/json";
+            url += '?' + $.param({
+               'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+               'address': zipInput,
+               'async': true
+        
+            });
+	       $.ajax({
+	           url: url,
+               method: 'GET',   
+               async: true,
+	       }).done(function (result) {
+               userLL = result.results[0].geometry.location.lat+","+result.results[0].geometry.location.lng;
+               parkList(userLL);
+      
+
+	       }).fail(function (err) {
+	           throw err;
+
 
     });
     
@@ -191,6 +299,11 @@ zip = 78736;
      $("#zip").val("");
 
    }); 
+
+        });
+    });
+
+
      //ENDS on("click", fn(e))
        // Code to retrieve Active Park Locations
 
@@ -210,4 +323,3 @@ zip = 78736;
 
 
 
-        
