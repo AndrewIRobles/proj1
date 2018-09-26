@@ -11,40 +11,46 @@
 </head>
 
 <body>
-	<label>ZIP CODE</label>
-	<input id="zip" type="number" name="zipcode">
-	<button id="zipbutton">SUBMIT ZIP CODE</button>
+	<div class="zipdiv">
+		<label>ZIP CODE</label>
+		<input id="zip" type="number" name="zipcode">
+		<button id="zipbutton">SUBMIT ZIP CODE</button>
+	</div>
 
-	<p>Parks with Dogs</p>
-	<div id="active"></div>
+	<div class="listdiv">
+		<div id="mapdiv">map goes here</div>
+	
+		<h3>Parks with Dogs</h3>
+		<div id="active"></div>
 
-	<p>Parks without Dogs</p>
-	<div id="inactive"></div>
+		<h3>Parks without Dogs</h3>
+		<div id="inactive"></div>
+	</div>
 
-
-	<label>PARK NAME</label>
-	<input id="parkname" type="text" name="park_id">
-	<br>
-	<label>PARK ID</label>
-	<input id="park_id" type="text" name="park_id">
-	<br>
-	<label>START TIME</label>
-	<input id="start" type="text" name="start">
-	<br>
-	<label>END TIME</label>
-	<input id="end" type="text" name="end">
-	<br>
-	<label>DOG NAME</label>
-	<input id="dogName" type="text" name="name">
-	<br>
-	<label>DOG BREED</label>
-	<input id="dogBreed" type="text" name="breed">
-	<br>
-	<label>DOG AGE</label>
-	<input id="dogAge" type="number" name="age">
-	<br>
-	<button id="dogdaybutton">SUBMIT</button>
-
+	<div class="userdiv">
+		<label>PARK NAME</label>
+		<input id="parkname" type="text" name="park_id">
+		<br>
+		<label>PARK ID</label>
+		<input id="park_id" type="text" name="park_id">
+		<br>
+		<label>START TIME</label>
+		<input id="startH" type="text" name="start">:<input id="startM" type="text" name="start">
+		<br>
+		<label>END TIME</label>
+		<input id="endH" type="text" name="end">:<input id="endM" type="text" name="end">
+		<br>
+		<label>DOG NAME</label>
+		<input id="dogName" type="text" name="name">
+		<br>
+		<label>DOG BREED</label>
+		<input id="dogBreed" type="text" name="breed">
+		<br>
+		<label>DOG AGE</label>
+		<input id="dogAge" type="number" name="age">
+		<br>
+		<button id="dogdaybutton">SUBMIT</button>
+	</div>
 <p>
 class="parkbutton" this class should be attached to the select button for each park.  
 
