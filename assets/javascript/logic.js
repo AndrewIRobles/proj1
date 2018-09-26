@@ -129,8 +129,9 @@ console.log("Park Index #: " + i);
     // console.log("Inactive Place ID: " + place_id);
 
 //***grab and console log out name of park
-  name = result.results[i].name;
-          console.log("Inactive Place ID: " + result.results[i].name);
+for (var j=0; j<5; j++) { 
+  name = result.results[j].name;
+          console.log("Inactive Place ID: " + result.results[j].name);
       // Then dynamically generating buttons for each movie in the array
       // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
       // Creating an element to have the name displayed
@@ -146,11 +147,11 @@ parkName.text(name);
   $("#inactive").append(parkName);
 
 //***grab and console log out Place ID of park
-  let place_id = result.results[i].place_id;
+  let place_id = result.results[j].place_id;
       console.log(place_id);
       // Adding a data-attribute
 parkName.attr("data-ID", place_id);
-
+}
 
 
 
