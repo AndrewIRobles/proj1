@@ -68,8 +68,12 @@ OUTLINE OF HOW CODE IS LAID OUT
 
 */
 
+
+
 	//load Jqery stuff
-$(document).ready(function () {
+//$(document).ready(function () {
+
+	markerArray = []; 
 
 		// Initialize Firebase
 	let config = {
@@ -203,6 +207,28 @@ function parkList (latlong){
 
 			printInactiveParks(i, result);
 
+			//Code to store the location picked by user.  
+		$(".parkbutton").on("click", function(e){
+				e.preventDefault();
+
+	        $(".userdiv").show();
+			$(".listdiv").hide();
+
+/*
+//***grab park info for submissionf
+			parkName = parkName;
+				console.log("Park picked is " + parkName);
+			parkLocation = parkLocation;
+			parkLatLong = ;
+*/
+	        console.log("park button info: ", e.currentTarget.dataset.id);
+	        
+	        let selectedParkLL = JSON.parse(e.currentTarget.dataset.id);
+	        markerArray.push(selectedParkLL);
+
+	        createMarker(markerArray);
+		});
+
 		};
 
 	};
@@ -216,7 +242,8 @@ function parkList (latlong){
 
 			//grab and console log out name of park
       	name = result.results[i].name;
-      			console.log("Inactive Place ID: " + result.results[i].name);
+      		console.log("Inactive Park Name: " + result.results[i].name);
+
 		  	// Then dynamically generating buttons for each movie in the array
 		  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           	// Creating an element to have the name displayed
@@ -231,13 +258,24 @@ function parkList (latlong){
   		$("#inactive").append(parkName);
 
 			//grab and console log out Place ID of park
-      	let place_id = result.results[i].place_id;
-      	    console.log("Inactive Park Place ID: " + place_id);
+      	let selectedParkObj = JSON.stringify(result.results[i]);
+      	    console.log("Below is Park Object"); 
+      	    //console.log(selectedParkObj);
 			//Adding a data-attribute with the place ID.  
-		parkName.attr("data-id", place_id);
+		parkName.attr("data-id", selectedParkObj);
 			//test to see if it works
-		let value = $(parkName).attr("data-id")
-			console.log("Retrieved Place ID " + value)
+		//let value = $(parkName).attr("data-id")
+			//console.log("Retrieved Place ID " + value)
+
+			//grab and console log out Place ID of park
+      	let placeLL = result.results[i].geometry.location;
+      	    console.log("Inactive Park Latitude/Longitude below");
+      	    console.log(placeLL);
+			//Adding a data-attribute with the place ID.  
+		parkName.attr("data-ll", placeLL);
+			//test to see if it works
+			valuell = $(parkName).attr("data-ll");
+			console.log(valuell);
 
 			//Grabbing and console logging the address data
       	let address = result.results[i].vicinity;
@@ -251,6 +289,8 @@ function parkList (latlong){
 			//Adding the button to the buttons-view div
   		$("#inactive").append(addressOut);
 
+
+
 //***with links to that parks' Google Map / Google Locations page??
 
 	}; //close for print inactive parks
@@ -258,38 +298,53 @@ function parkList (latlong){
 
 
 
-}); // ENDS doc.ready
-
-
+//----------------------------------------------------------------
 
 /*
+	const getLocationID = place_id => {
+		let queryURL = "***place_id***"
+		$.get(queryURL)
+
+			//we store the retrieved data in an object called Response
+		.then(response => {
+			console.log("Place ID: " + response.results[i].photos.place_id);
+			console.log("Name: " + response.results[i].name);
+			console.log("Address: " + response.results[i].vicinity);
+		});
+	}
+
+		//call function
+	getLocationID("place_id");
+*/ 
+
+//Code that presents links to that parks' Google Map / Google Locations page
 
 
-// -------Code to retrieve Active Park Locations/Users-------------------------
 
-		// At the initial load and subsequent value changes, get a snapshot of the stored data.  This function allows you to update your page in real-time when the firebase database changes.
-	database.ref("/dogday").on("child_added", function (snapshot) {
 
-			// Set the variables equal to the stored values.
-		parkName = snapshot.val().parkName;
-		parkLocation = snapshot.val().parkLocation;
-		startTime = snapshot.val().startTime;
-		endTime = snapshot.val().endTime;
-		dogName = snapshot.val().dogName;
-		dogBreed = snapshot.val().dogBreed;
-		dogAge = snapshot.val().dogAge;
+		//Initialize Map
+	let map;
+	function initMap() {
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: 30.2672, lng: -97.7431},
+	    zoom: 8,
+	    disableDefaultUI: true,
+	  });
+	}; // ENDS initMap
 
-			console.log("Park picked is " + parkName);
-			console.log("Start Location ID is " + parkLocation);
-			console.log("Start Time is " + startTime);
-			console.log("End Time is " + endTime);
-			console.log("Dog Name is " + dogName);
-			console.log("Dog Breed is " + dogBreed);
-			console.log("Dog Age is " + dogAge);
+		//Code to present choosen park on map.  
+	function createMarker(){
+	  console.log("markerarray", markerArray[0])
+	  for (i=0; i<markerArray.length; i++){
+	    let marker = new google.maps.Marker({
+	      position: markerArray[i].geometry.location,
+	      map: map,
+	      title: markerArray[i].name
+	    });
+	  }
+	}
 
-	}); // ENDS database /dogday retrieval 
-
-// -----Code to get current time --------------------------------------------
+// -----Code to get current time --------------------------------
 
 		// Current Time
 	let currentTime = moment();
@@ -298,20 +353,104 @@ function parkList (latlong){
 		console.log("Current Time: " + currentTimeM);
 		console.log("Current Unix Time (sec): " + currentTimeU);
 
-//*** https://momentjs.com/docs/#/get-set/hour/
-//*** `moment().hour(7).minute(45).format("dddd, MMMM Do YYYY, h:mm:ss a")`
-
-		// Start Time
-	startTime = moment(startTime, "HH:mm a");
-			console.log("Start Time: " + startTime);
-	startTimeU = moment(startTime, "X");
-			console.log("Start Time: " + startTimeU);
-	difference = startTimeU - currentTime;
-			console.log("Start Time: " + difference);
 
 
 
+	//Code to collect data of new user and upload to Firebase
+$("#dogdaybutton").on("click", function (event) {
+		event.preventDefault();
 
+		let parkName = $("#parkname").val().trim();
+		let parkLocation = $("#park_id").val().trim();
+		let startTimeH = $("#startH").val().trim();
+		let startTimeM = $("#startM").val().trim();
+		let endTimeH = $("#endH").val().trim();
+		let endTimeM = $("#endM").val().trim();
+		let dogName = $("#dogName").val().trim();
+		let dogBreed = $("#dogBreed").val().trim();
+		let dogAge = $("#dogAge").val().trim();
+
+		let startTime = moment().hour(startTimeH).minute(startTimeM).format("dddd, MMMM Do YYYY, h:mm:ss a");
+		let startTimeU = moment().hour(startTimeH).minute(startTimeM).format("X");
+			console.log("UNIX Start Time Below");
+			console.log(startTimeU);
+			console.log("Start Time U: " + startTimeU);
+
+		let endTime = moment().hour(endTimeH).minute(endTimeM).format("dddd, MMMM Do YYYY, h:mm:ss a");
+		let endTimeU = moment().hour(endTimeH).minute(endTimeM).format("X");
+			console.log("UNIX End Time Below");
+			console.log(endTimeU);
+			console.log("End Time U: " + endTimeU);
+
+			console.log("Park picked is " + parkName);
+			console.log("Start Location ID is " + parkLocation);
+			console.log("Start Time is " + startTimeH+":"+startTimeM);
+			console.log("End Time is " + endTimeH+":"+endTimeM);
+			console.log("Dog Name is " + dogName);
+			console.log("Dog Breed is " + dogBreed);
+			console.log("Dog Age is " + dogAge);
+
+			// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
+		database.ref("/dogday").push({
+			parkName: parkName,
+			parkLocation: parkLocation,
+			startTimeH: startTimeH,
+			startTimeM: startTimeM,
+			endTimeH: endTimeH,
+			endTimeM: endTimeM,
+			startTimeU: startTimeU,
+			endTimeU: endTimeU,
+			dogName: dogName,
+			dogBreed: dogBreed,
+			dogAge: dogAge
+		});
+	});
+
+// -------Code to retrieve Active Park Locations/Users------------------
+
+		// At the initial load and subsequent value changes, get a snapshot of the stored data.  This function allows you to update your page in real-time when the firebase database changes.
+	database.ref("/dogday").on("child_added", function (snapshot) {
+
+			// Set the variables equal to the stored values.
+		parkNameD = snapshot.val().parkName;
+		parkLocationD = snapshot.val().parkLocation;
+		startTimeHD = snapshot.val().startTimeH;
+		startTimeMD = snapshot.val().startTimeM;
+		endTimeHD = snapshot.val().endTimeH;
+		endTimeMD = snapshot.val().endTimeM;
+		startTimeUD = snapshot.val().startTimeU;
+		endTimeUD = snapshot.val().endTimeU;
+		dogNameD = snapshot.val().dogName;
+		dogBreedD = snapshot.val().dogBreed;
+		dogAgeD = snapshot.val().dogAge;
+
+			//Code to console log Active Parks/Users to the Console
+		console.log("Park picked is (D) " + parkNameD);
+		console.log("Start Location ID is (D) " + parkLocationD);
+		console.log("Start Time is (D) " + startTimeHD+":"+startTimeMD);
+		console.log("UNIX Start Time Below");
+		console.log(startTimeUD);
+		console.log("End Time is (D) " + endTimeHD+":"+endTimeMD);
+		console.log("UNIX End Time Below");
+		console.log(endTimeUD);
+		console.log("Dog Name is (D) " + dogNameD);
+		console.log("Dog Breed is (D) " + dogBreedD);
+		console.log("Dog Age is (D) " + dogAgeD);
+
+		// If any errors are experienced, log them to console.
+	}, function (errorObject) {
+		console.log("The read failed: " + errorObject.code);
+	}); // ENDS database /dogday retrieval 
+
+
+
+ //  }); // ENDS doc.ready
+
+
+
+/*
+
+//***Code to get factoids and pics of available dog. 
 
 
 //---------------Compare Lists Function -------------------------
@@ -338,8 +477,6 @@ db.ref('/dogday').once('value', users =>{
     // doing whatever with user.val()
   })
 })
-
-
 
 		//loop to go through every available park
 	for (let i = 0; i <= numberOfParks - 1; i++) {
@@ -455,50 +592,6 @@ https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAjOzz5XzUwhDvQ
 		});
 	};
 
-//----------------------------------------------------------------
-
-//Code to store the location picked by user.  
-	//RESEARCH THE "UPDATE" NOTATION FOR FIREBASE
-	// For anyone still having trouble with firebase, https://firebase.google.com/docs/reference/js/firebase.database.Reference is probably the single most important page in the documentation.  On the right side of the page under `methods`, you'll find all the things you have access to on any database reference.  It's also where you'll find the `.push()` method.
-	//Try RETURNS function for comparing place IDs.  
-
-$(".parkbutton").on("click", function (event) {
-		event.preventDefault();
-
-	$(".userdiv").show();
-
-	parkName = "";
-		console.log("Park picked is " + parkName);
-
-			//code to get location from button that was pushed.  
-		let value = $(parkName).attr("data-id")
-			console.log("Retrieved Place ID " + value)
-
-		console.log(parkLocation);
-
-		database.ref("/dogday").push({
-			parkName: parkName,
-			parkLocation: parkLocation,
-		});
-	});
-
-	const getLocationID = place_id => {
-		let queryURL = "***place_id***"
-		$.get(queryURL)
-
-			//we store the retrieved data in an object called Response
-		.then(response => {
-			console.log("Place ID: " + response.results[i].photos.place_id);
-			console.log("Name: " + response.results[i].name);
-			console.log("Address: " + response.results[i].vicinity);
-		});
-	}
-
-		//call function
-	getLocationID("place_id");
-
-//Code that presents links to that parks' Google Map / Google Locations page
-
 //Code to present available dog and other user end time at active park
 
 		let dogName = ***
@@ -510,52 +603,9 @@ $(".parkbutton").on("click", function (event) {
 			console.log("end time of other user: " + endtime);
 		$(".endtime").text("Will be there till: " + endtime);
 
-
-	//Code to collect data of new user and upload to Firebase
-$("#dogdaybutton").on("click", function (event) {
-		event.preventDefault();
-
-		startTime = $("#start").val().trim();
-		endTime = $("#end").val().trim();
-		dogName = $("#dogName").val().trim();
-		dogBreed = $("#dogBreed").val().trim();
-		dogAge = $("#dogAge").val().trim();
-		
-		startTimeU = moment(startTime, "x");
-			console.log("Start Time: " + startTimeU);
-
-		endTimeU = moment(startTime, "x");
-			console.log("Start Time: " + startTimeU);
-
-			console.log(startTime);
-			console.log(endTime);
-			console.log(dogName);
-			console.log(dogBreed);
-			console.log(dogAge);
-
-			// Save the new data in Firebase. This will cause our "value" callback above to fire and update the UI.
-		database.ref("/dogday").push({
-			startTime: startTime,
-			endTime: endTime,
-			startTimeU: startTimeU,
-			endTimeU: endTimeU,
-			dogName: dogName,
-			dogBreed: dogBreed,
-			dogBreed: dogAge,
-		});
-	});
-
-	// --------------------------------------------------------------
-
-//Code to factoids and pics of available dog. 
-
-		// If any errors are experienced, log them to console.
-	}, function (errorObject) {
-		console.log("The read failed: " + errorObject.code);
-	});
-
-
 */
+
+
 
 
 
