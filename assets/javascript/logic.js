@@ -28,7 +28,7 @@ $(document).ready(function(){
         $('#pagetwo').removeClass("hide");
     });
 
-     $("#view-park-2").on('click', function(e) {
+     $(".parkbutton").on('click', function(e) {
          console.log("event click: ", e);
         $('#pagetwo').addClass("hide");
         $('#page3').removeClass("hide");
@@ -238,7 +238,7 @@ parkName.attr("data-ID", place_id);
 
 		//Code to collect Zip Code
 		// Whenever a user clicks the submit button
-        $("#zipbutton").on("click", function (zip){
+/*         $("#zipbutton").on("click", function (zip){
             zip.preventDefault(); 
             let zipInput = $("#zip").val().trim();
 
@@ -263,7 +263,7 @@ parkName.attr("data-ID", place_id);
 
 
     });
-    
+     */
     
         
     
@@ -274,17 +274,39 @@ parkName.attr("data-ID", place_id);
      console.log("zip added? ", zipAdded);
 
    $("#zipbutton").on("click", function(e) {
-     e.preventDefault();
-     let zip = $("#zip").val().trim();
-     console.log("your zip code: ", zip);
 
-     if(zip !==""){
+    e.preventDefault();
+    let zipInput = $("#zip").val().trim();
+    console.log("your zip code: ", zipInput);
+
+/*     let url = "https://maps.googleapis.com/maps/api/geocode/json";
+    url += '?' + $.param({
+       'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+       'address': zipInput,
+       'async': true
+
+    });
+   $.ajax({
+       url: url,
+       method: 'GET',   
+       async: true,
+   }).done(function (result) {
+       userLL = result.results[0].geometry.location.lat+","+result.results[0].geometry.location.lng;
+       parkList(userLL);
+
+
+   }).fail(function (err) {
+       throw err; */
+
+
+
+     if(zipInput !==""){
          zipAdded = true;
          console.log("zip added? ", zipAdded);
 
          // CALL API IF ZIP CODE HAS BEEN ADDED 
          var APIKey = "166a433c57516f51dfab1f7edaed8413";
-         var queryURL = "https:api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&units=imperial&appid=" + APIKey;
+         var queryURL = "https:api.openweathermap.org/data/2.5/weather?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
          $.ajax({
            url: queryURL,
            method: "GET"
@@ -296,13 +318,35 @@ parkName.attr("data-ID", place_id);
 
          });  //ENDS fn(response)
 
-     };  //ENDS if statement to check if a zip code has been entered before placing API call
+     }; 
+      //ENDS if statement to check if a zip code has been entered before placing API call
+
+      let url = "https://maps.googleapis.com/maps/api/geocode/json";
+      url += '?' + $.param({
+         'key': "AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI",
+         'address': zipInput,
+         'async': true
+  
+      });
+     $.ajax({
+         url: url,
+         method: 'GET',   
+         async: true,
+     }).done(function (result) {
+         userLL = result.results[0].geometry.location.lat+","+result.results[0].geometry.location.lng;
+         parkList(userLL);
+  
+  
+     }).fail(function (err) {
+         throw err;
+
      $("#zip").val("");
 
    }); 
 
         });
     });
+
 
 
      //ENDS on("click", fn(e))
