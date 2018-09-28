@@ -137,12 +137,12 @@ NOT REMOTELY DONE
 			//Code to console log Active Parks/Users to the Console
 		// console.log("Park picked is (D) " + parkNameD);
 		// console.log("Start Location ID is (D) " + parkLocationD);
-		// console.log("Start Time is (D) " + startTimeHD+":"+startTimeMD);
-		// console.log("UNIX Start Time Below");
-		// console.log(startTimeUD);
-		// console.log("End Time is (D) " + endTimeHD+":"+endTimeMD);
-		// console.log("UNIX End Time Below");
-		// console.log(endTimeUD);
+		console.log("Start Time is (D) " + startTimeHD+":"+startTimeMD);
+		console.log("UNIX Start Time Below");
+		console.log(startTimeUD);
+		console.log("End Time is (D) " + endTimeHD+":"+endTimeMD);
+		console.log("UNIX End Time Below");
+		console.log(endTimeUD);
 		// console.log("Dog Name is (D) " + dogNameD);
 		// console.log("Dog Breed is (D) " + dogBreedD);
 		// console.log("Dog Age is (D) " + dogAgeD);
@@ -221,28 +221,39 @@ function printActiveParks() {
 
 	  			//GIVES TIMES
 
-
-
            		//end time minutes No longer need if using code snippet below
            	console.log(user.node_.children_.root_.left.right.left.value);
 
            		//gives start time in UNIX
-           	let starTimeU = user.node_.children_.root_.right.right.value.value_;
-           		console.log(starTimeU);
+           	let startTimeU = user.node_.children_.root_.right.right.value.value_;
+           	console.log(startTimeU);
+           		//reformat time
+           	startTimeMJS = moment(startTimeU, 'X').format("hh:mm a");
+			console.log("START TIME IS " + startTimeMJS);
+			  	// Providing the text
+			dogInfo.text(startTimeMJS);
+				//Adding the test to the div
+	  		$("#active").append("Arrival: " + startTimeMJS);
+
+/*
+           		//gives start time in UNIX
+           	endTimeU = __________________________________________;
+           		endTimeMJS = moment(endTimeU, 'X').format("hh:mm a");
+				console.log("END TIME IS " + endTimeMJS);
+			  	// Providing the text
+			dogInfo.text(endTimeMJS);
+				//Adding the test to the div
+	  		$("#active").append("There until: " + endTimeMJS);
 
 				//Use this logic to determine if user is still in the park
             	//converts UNIX time to usable datetime
-           	myVar = user.node_.children_.root_.right.right.value.value_;
+           	let myVar = user.node_.children_.root_.right.right.value.value_;
            	let dt = eval(myVar*1000);
            	dt = dt +7200
            	let myDate = new Date(dt);
            	let currentDate= new Date($.now());
            	console.log(myDate +" is user date");
 
-			  	// Providing the initial button text
-			dogInfo.text(myDate);
-				//Adding the button to the buttons-view div
-	  		$("#active").append("There until" + myDate +"</h2>");
 
 
            	console.log(currentDate +" is myDate date");
@@ -251,6 +262,7 @@ function printActiveParks() {
            	else{
            	console.log("User gone" + currentDate) ;
            	};
+*/
 
 //***Code to Grabbing and console logging the address data
 
@@ -299,6 +311,27 @@ printActiveParks();
     $("#zipbutton").on("click", function (zip){
             zip.preventDefault(); 
             let zipInput = $("#zip").val().trim();
+
+            if(zipInput !==""){
+                zipAdded = true;
+                // console.log("zip added? ", zipAdded);
+       
+                // CALL API IF ZIP CODE HAS BEEN ADDED 
+                var APIKey = "166a433c57516f51dfab1f7edaed8413";
+                var queryURL = "https:api.openweathermap.org/data/2.5/weather?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
+                $.ajax({
+                  url: queryURL,
+                  method: "GET"
+                }).then(function(response) {
+                    // console.log("response object: ", response);
+                    let temperature = response.main.temp;
+                    let roundedT = Math.round(temperature);
+                    $("#temp").prepend("<p>" + roundedT + " &#8457;</p>")
+
+                });  //ENDS fn(response)
+       
+
+
 				//code to create request to google locations and Generate key request for Latitude and Longitude
             let url = "https://maps.googleapis.com/maps/api/geocode/json";
             url += '?' + $.param({
@@ -327,7 +360,8 @@ printActiveParks();
 	       });
           // return userLL;
          
-	});
+	};
+});
 
 
 //------------- PARK LIST Function START  --------------------------/
