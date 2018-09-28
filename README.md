@@ -12,16 +12,16 @@ A puppy playdate mobile app that utilizes Firebase, Moment, and API calls to Goo
 
 ## Back End Components
 
- -Google Maps API
- -Google Places API
- -OpenWeatherMap API
- -Firebase
- -Moment
- -Jquery
- -JSON
- -Javascript
- -CSS
- -HTML
+ - Google Maps API
+ - Google Places API
+ - OpenWeatherMap API
+ - Firebase
+ - Moment
+ - Jquery
+ - JSON
+ - Javascript
+ - CSS
+ - HTML
 
 ## Future Development:
 
