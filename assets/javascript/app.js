@@ -111,7 +111,7 @@ OUTLINE OF HOW CODE IS LAID OUT
                 // });  //ENDS fn(response)
 	   
 				var APIKey = "166a433c57516f51dfab1f7edaed8413";
-				var queryURL = "https:api.openweathermap.org/data/2.5/forecast?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
+				var queryURL = "https://cors-anywhere.herokuapp.com/https:api.openweathermap.org/data/2.5/forecast?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
 				$.ajax({
 				url: queryURL,
 				method: "GET"
