@@ -8,7 +8,7 @@ h1{
 }
 
 body{
-    width: 97%;
+    width: 95%;
     background-image: url("../images/mural-dog.jpeg");
 }
 
@@ -25,6 +25,11 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.gozip{
+display: flex;
+justify-content: center;
 }
 
 .newParty{
@@ -169,7 +174,6 @@ label{
     -khtml-border-radius: 999px;
     -webkit-border-radius: 999px;
 }
-
 html,
 body {
     height: 100%;

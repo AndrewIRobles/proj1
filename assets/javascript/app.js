@@ -67,8 +67,7 @@ OUTLINE OF HOW CODE IS LAID OUT
 		//switch things on and off
 	$(".zipdiv").show();
 	$(".listdiv").hide();
-    $(".userdiv").hide();
-    $(".page3").hide();
+	$(".userdiv").hide();
 
 		// Set up variables
 	let zip = "";
@@ -208,7 +207,7 @@ function parkList (latlong){
 		$(".parkbutton").on("click", function(e){
 				e.preventDefault();
 
-	        $(".page3").show();
+	        $(".userdiv").show();
 			$(".listdiv").hide();
 
 /*
@@ -323,8 +322,8 @@ function parkList (latlong){
 	function initMap() {
         console.log(document.getElementById('map'))
 	  map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: 30.2672, lng: -97.7431},
-	    zoom: 8,
+	    center: {lat: 30.2604, lng: -97.7145},
+	    zoom: 14,
 	    disableDefaultUI: true,
       });
       console.log("map exists!")
@@ -340,10 +339,7 @@ function parkList (latlong){
 	      title: markerArray[i].name
 	    });
 	  }
-    }
-    
-    
-    
+	}
 
 // -----Code to get current time --------------------------------
 
@@ -407,12 +403,6 @@ $("#dogdaybutton").on("click", function (event) {
 		});
 	});
 
-
-    $("#add-pup").on("click", function(event) {
-        event.preventDefault();
-        $(".page3").hide();
-        $(".userdiv").show();
-    });
 // -------Code to retrieve Active Park Locations/Users------------------
 
 		// At the initial load and subsequent value changes, get a snapshot of the stored data.  This function allows you to update your page in real-time when the firebase database changes.
