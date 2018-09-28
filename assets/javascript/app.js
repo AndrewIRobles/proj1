@@ -396,5 +396,87 @@ $("#dogdaybutton").on("click", function (event) {
 
 
 
+	// function printActiveParks() {
+
+	// 	database.ref('/dogday').once('value', users =>{
+	// 	   users.forEach(user => {
+	
+	// 				   //get each place ID
+	// 			   let placeID = user.ref.key; 
+	
+	// 				   //don't touch
+	// 				   //GETS NAME OF PARK
+	// 			   name = user.node_.children_.root_.value.value_
+	// 				  // Creating an element to have the name displayed
+	// 			  let aParkName = $("<button>");
+	// 					// Adding a class of movie-btn to our button
+	// 			aParkName.addClass("aparkbutton");
+	// 				  // Adding a data-attribute
+	// 			aParkName.attr("data-name", name);
+	// 				  // Providing the initial button text
+	// 			aParkName.text(name);
+	// 				//Adding the button to the buttons-view div
+	// 			  $("#active").append(aParkName);
+	
+	// 				//Adding a data-attribute with the place ID.  
+	// 			aParkName.attr("data-id", placeID);
+	// 				//test to see if it works
+	// 				//valueID = $(aParkName).attr("data-id");
+	// 				//console.log("test to see if data attribute worked " + valueID);
+	
+	// 				   //GIVES DOG NAME
+	// 			   let dogName = user.node_.children_.root_.left.left.right.value.value_;
+	// 				   console.log(dogName + " Is the Dog's name");
+	// 				  // Creating an element to have the Dog Info displayed
+	// 			  let dogInfo = $("<p>");
+	// 				  // Adding a styling class to dog info 
+	// 			aParkName.addClass("styletag");
+	// 				  // Adding a data-attribute
+	// 			dogInfo.attr("data-dogname", dogName);
+	// 				  // Providing the initial button text
+	// 			dogInfo.text(dogName);
+	// 				//Adding the button to the buttons-view div
+	// 			  $("#active").append("Dog's name: " + dogName);
+	
+	// 				   //GIVES DOG BREED
+	// 			   let dogBreed = user.node_.children_.root_.left.left.value.value_;
+	// 				   console.log(dogBreed + " Is the Dog's name");
+	// 				  // Adding a data-attribute
+	// 			dogInfo.attr("data-dogbreed", dogBreed);
+	// 				  // Providing the initial button text
+	// 			dogInfo.text(dogBreed);
+	// 				//Adding the button to the buttons-view div
+	// 			  $("#active").append("(" + dogBreed + ", ");
+	
+	// 				   //GIVES DOG AGE
+	// 			   let dogAge = user.node_.children_.root_.left.left.left.value.value_;
+	// 				   console.log(dogAge + " Years Old");
+	// 				  // Adding a data-attribute
+	// 			dogInfo.attr("data-dogbreed", dogAge);
+	// 				  // Providing the initial button text
+	// 			dogInfo.text(dogAge);
+	// 				//Adding the button to the buttons-view div
+	// 			  $("#active").append(dogAge + " Years Old)");
+	
+	// 				  //GIVES TIMES
+	
+	// 				   //end time minutes No longer need if using code snippet below
+	// 			   console.log(user.node_.children_.root_.left.right.left.value);
+	
+	// 				   //gives start time in UNIX
+	// 			   let startTimeU = user.node_.children_.root_.right.right.value.value_;
+	// 			   console.log(startTimeU);
+	// 				   //reformat time
+	// 			   startTimeMJS = moment(startTimeU, 'X').format("hh:mm a");
+	// 			console.log("START TIME IS " + startTimeMJS);
+	// 				  // Providing the text
+	// 			dogInfo.text(startTimeMJS);
+	// 				//Adding the test to the div
+	// 			  $("#active").append("Arrival: " + startTimeMJS);
+	// 	   });
+	// 	});
+	// };
 
 
+
+ //  }); // ENDS doc.ready
