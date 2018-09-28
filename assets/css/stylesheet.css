@@ -164,8 +164,6 @@ label{
     padding-right: 1em;
 }
 
- /* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
 #map {
     margin: 2em;
     width: 500px;
@@ -176,7 +174,6 @@ label{
     -khtml-border-radius: 999px;
     -webkit-border-radius: 999px;
 }
-/* Optional: Makes the sample page fill the window. */
 html,
 body {
     height: 100%;
