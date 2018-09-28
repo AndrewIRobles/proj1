@@ -97,19 +97,38 @@ OUTLINE OF HOW CODE IS LAID OUT
                 // console.log("zip added? ", zipAdded);
        
                 // CALL API IF ZIP CODE HAS BEEN ADDED 
-                var APIKey = "166a433c57516f51dfab1f7edaed8413";
-                var queryURL = "https:api.openweathermap.org/data/2.5/weather?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
-                $.ajax({
-                  url: queryURL,
-                  method: "GET"
-                }).then(function(response) {
-                    // console.log("response object: ", response);
-                    let temperature = response.main.temp;
-                    let roundedT = Math.round(temperature);
-                    $("#temp").prepend("<p>" + roundedT + " &#8457;</p>")
+                // var APIKey = "166a433c57516f51dfab1f7edaed8413";
+                // var queryURL = "https:api.openweathermap.org/data/2.5/weather?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
+                // $.ajax({
+                //   url: queryURL,
+                //   method: "GET"
+                // }).then(function(response) {
+                //     // console.log("response object: ", response);
+                //     let temperature = response.main.temp;
+                //     let roundedT = Math.round(temperature);
+                //     $("#temp").prepend("<p>" + roundedT + " &#8457;</p>")
 
-                });  //ENDS fn(response)
-       
+                // });  //ENDS fn(response)
+	   
+				var APIKey = "166a433c57516f51dfab1f7edaed8413";
+				var queryURL = "https:api.openweathermap.org/data/2.5/forecast?zip=" + zipInput + ",us&units=imperial&appid=" + APIKey;
+				$.ajax({
+				url: queryURL,
+				method: "GET"
+				}).then(function(response) {
+				console.log("response object: ", response);
+				let temperatureMin = response.list[0].main.temp_min;
+				let temperatureMax = response.list[0].main.temp_max;
+				let roundedMax = Math.round(temperatureMax);
+				let roundedMin = Math.round(temperatureMin);
+				let conditions = response.list[0].weather[0].description;
+
+
+				$("#forecast").append("<tr><td>" + roundedMin + " &deg;F</td><td>" + roundedMax + "&deg;F</td><td>" + conditions + "</td></tr>");
+
+				});  //ENDS fn(response)
+
+
             }; 
 
 				//code to create request to google locations and Generate key request for Latitude and Longitude
