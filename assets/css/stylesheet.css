@@ -65,13 +65,34 @@ justify-content: center;
 }
 
 .weather{
+    width: 375px;
     text-align: center;
-    margin: auto;
-    /* background-color: #e9ecef; */
+    margin: 0;
+    margin-bottom: 1em;
+    background-image: url("http://kasetsombun.chaiyaphum.doae.go.th/images/%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%872.jpg");
+    background-size: 70%;
+    background-color: rgba(237,237,237, .9);
+    border-radius: 25px;
     color: rgb(34, 58, 58);
     font-size: 32px;
     font-style: bold;
 }
+
+.table{
+    margin-bottom: 0px;
+}
+.table td {
+padding-top: .25rem;
+padding-bottom: .1rem;
+text-align: center;
+}
+
+.table th{
+    padding-top: .25rem;
+    padding-bottom: .1rem;
+    text-align: center;
+    }
+
 
 .dot {
     height: 20rem;
@@ -95,6 +116,14 @@ justify-content: center;
     border-style: groove; */
     padding: .6em;
     border-radius: 10px;
+}
+
+th{
+    font-size: 12px;
+}
+
+td{
+    font-size: 12px;
 }
 
 #dog-list{
@@ -173,14 +202,9 @@ label{
     padding-right: 1em;
 }
 
-<<<<<<< HEAD
- /* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
-=======
->>>>>>> 0994f1a358e193dca2235145396e1d3095229894
+
 #map {
-    /* margin-left: 2em;
-    margin-top: 2em; */
+    
     padding: 4em;
     width: 350px;
     height: 350px;
@@ -190,12 +214,8 @@ label{
     -khtml-border-radius: 999px;
     -webkit-border-radius: 999px;
 }
-<<<<<<< HEAD
-/* Optional: Makes the sample page fill the window. */
-=======
->>>>>>> 0994f1a358e193dca2235145396e1d3095229894
-html,
-body {
+
+html, body {
     height: 100%;
     margin: .5em;
     padding: .5em;
