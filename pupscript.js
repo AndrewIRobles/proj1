@@ -67,7 +67,8 @@ OUTLINE OF HOW CODE IS LAID OUT
 		//switch things on and off
 	$(".zipdiv").show();
 	$(".listdiv").hide();
-	$(".userdiv").hide();
+    $(".userdiv").hide();
+    $(".page3").hide();
 
 		// Set up variables
 	let zip = "";
@@ -207,7 +208,7 @@ function parkList (latlong){
 		$(".parkbutton").on("click", function(e){
 				e.preventDefault();
 
-	        $(".userdiv").show();
+	        $(".page3").show();
 			$(".listdiv").hide();
 
 /*
@@ -339,7 +340,10 @@ function parkList (latlong){
 	      title: markerArray[i].name
 	    });
 	  }
-	}
+    }
+    
+    
+    
 
 // -----Code to get current time --------------------------------
 
@@ -403,6 +407,12 @@ $("#dogdaybutton").on("click", function (event) {
 		});
 	});
 
+
+    $("#add-pup").on("click", function(event) {
+        event.preventDefault();
+        $(".page3").hide();
+        $(".userdiv").show();
+    });
 // -------Code to retrieve Active Park Locations/Users------------------
 
 		// At the initial load and subsequent value changes, get a snapshot of the stored data.  This function allows you to update your page in real-time when the firebase database changes.
