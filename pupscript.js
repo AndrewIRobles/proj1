@@ -196,7 +196,7 @@ function printActiveParks() {
 			  	// Providing the initial button text
 			dogInfo.text(dogName);
 				//Adding the button to the buttons-view div
-	  		$("#active").append("Dog's name: " + dogInfo);
+	  		$("#active").append("Dog's name: " + dogName);
 
            		//gets dog age
            	console.log(user.node_.children_.root_.left.left.left.value.value_);
@@ -238,7 +238,7 @@ $(".aparkbutton").on("click", function(event){
 	$("#map").hide();
     
 		//grab park name for later submission
-	let selectedParkName = $(aParkName).attr("data-name");
+	let selectedParkName = $(this).attr("data-name");
 	console.log("Park picked is " + selectedParkName);
 
 		//grab park location for later submission
@@ -256,8 +256,6 @@ $(".aparkbutton").on("click", function(event){
 //***Code that presents links to that parks' Google Map / Google Locations page
 
 }); // end of Active Park Button trigger
-
-
 
    		});
 	});
@@ -298,7 +296,6 @@ printActiveParks();
 
 					// Once Longitude and Latitude are collected, use this function (from above) to find parks closest to your location:
 		        parkList(userLL);
-
 
 	       }).fail(function (err) {
 	           throw err;
@@ -426,9 +423,11 @@ function parkList (latlong){
 			//Adding the button to the buttons-view div
   		$("#inactive").append(addressOut);
 
+	}; //close for print inactive parks function
+
 			//Code to store the location picked by user.  
 		$(".parkbutton").on("click", function(e){
-				e.preventDefault();
+			e.preventDefault();
 
 	        $(".userdiv").show();
 			$(".listdiv").hide();
@@ -439,7 +438,8 @@ function parkList (latlong){
 	        let selectedParkLL = JSON.parse(e.currentTarget.dataset.id);
 	        markerArray.push(selectedParkLL);
 			console.log("Object of Selected Park",selectedParkLL);
-	        
+			
+			
 	        createMarker(markerArray);
 
 				//grab park name for later submission
@@ -463,9 +463,6 @@ function parkList (latlong){
 //***Code that presents links to that parks' Google Map / Google Locations page
 
 		}); // end of Button trigger
-
-	}; //close for print inactive parks function
-
 
 //----------------------------------------------------------------
 
