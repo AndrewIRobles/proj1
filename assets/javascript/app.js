@@ -19,32 +19,6 @@ id="dogName" for inputed name of dog form
 id="dogBreed" for inputed breed of dog breed form
 id="dogAge"for inputed age of dog breed form
 // --------------------------------------------------------------
-OUTLINE OF HOW CODE IS LAID OUT
-//Initialize Firebase
-//set up variables
-//Code to collect Zip Code
-//Code to converts zip to Latitude and Longitude
-	// Calls function to convert that to Park List
-//function to retrieve a list of parks
-//function to print an Inactive Park to html
-//Code to retrieve Active Park Locations
-//Code to retrieve current date and time
-//Code to compare Park List to Active Park List
-	//should exclude ones with less then 15 min on time?
-//function to print an Active Park to html
-//Code to store the location picked by user.  
-	//with links to that parks' Google Map / Google Locations page
-//Code to collect data of new user and upload to Firebase
-//Code to delete expired users?
-//Code to present available dog at active park
-//Code to factoids and pics of available dog. 
-*/
-
-
-
-	//load Jqery stuff
-//$(document).ready(function () {
-
 	markerArray = []; 
 
 		// Initialize Firebase
