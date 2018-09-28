@@ -190,6 +190,8 @@ function printActiveParks() {
 	           	console.log(dogName + " Is the Dog's name");
 	          	// Creating an element to have the Dog Info displayed
 	      	let dogInfo = $("<p>");
+	      		// Adding a styling class to dog info 
+			aParkName.addClass("styletag");
 			  	// Adding a data-attribute
 			dogInfo.attr("data-dogname", dogName);
 			  	// Providing the initial button text
@@ -217,11 +219,17 @@ function printActiveParks() {
 				//Adding the button to the buttons-view div
 	  		$("#active").append(dogAge + " Years Old)");
 
+	  			//GIVES TIMES
+
+
+
            		//end time minutes No longer need if using code snippet below
            	console.log(user.node_.children_.root_.left.right.left.value);
+
            		//gives start time in UNIX
-           	console.log(user.node_.children_.root_.right.right.value.value_);
-           	
+           	let starTimeU = user.node_.children_.root_.right.right.value.value_;
+           		console.log(starTimeU);
+
 				//Use this logic to determine if user is still in the park
             	//converts UNIX time to usable datetime
            	myVar = user.node_.children_.root_.right.right.value.value_;
@@ -231,6 +239,12 @@ function printActiveParks() {
            	let currentDate= new Date($.now());
            	console.log(myDate +" is user date");
 
+			  	// Providing the initial button text
+			dogInfo.text(myDate);
+				//Adding the button to the buttons-view div
+	  		$("#active").append("There until" + myDate +"</h2>");
+
+
            	console.log(currentDate +" is myDate date");
            	if( (new Date(myDate).getTime() > new Date()))
            	console.log("User is still there until "+ myDate);
@@ -238,10 +252,9 @@ function printActiveParks() {
            	console.log("User gone" + currentDate) ;
            	};
 
-//***Grabbing and console logging the address data
-			//let address = result.results[i].vicinity;
-				//console.log("Inactive Park Address: " + address);
-			});
+//***Code to Grabbing and console logging the address data
+
+		});
 
 //***Code to store the ACTIVE PARK location picked by user.  
 $(".aparkbutton").on("click", function(event){
@@ -250,6 +263,7 @@ $(".aparkbutton").on("click", function(event){
     $(".userdiv").show();
 	$(".listdiv").hide();
 	$("#active").hide();
+	$(".activeheader").hide();
 	$("#map").hide();
     
 		//grab park name for later submission
@@ -540,10 +554,10 @@ function parkList (latlong){
 					//console.log(endTimeU);
 					//console.log("End Time U: " + endTimeU);
 
-					//console.log("Park picked is " + parkName);
-					//console.log("Start Location ID is " + parkLocation);
-					//console.log("Start Time is " + startTimeH+":"+startTimeM);
-					//console.log("End Time is " + endTimeH+":"+endTimeM);
+					console.log("Park picked is " + parkName);
+					console.log("Start Location ID is " + parkLocation);
+					console.log("Start Time is " + startTimeH+":"+startTimeM);
+					console.log("End Time is " + endTimeH+":"+endTimeM);
 					console.log("Dog Name is " + dogName);
 					console.log("Dog Breed is " + dogBreed);
 					console.log("Dog Age is " + dogAge);
