@@ -39,8 +39,8 @@
         <br>
         <div class="row gozip">
             <div class="input-group-append">
-                    <button type="submit" id="zipbutton" class="btn btn-block"><img class="btn-img" src="assets/images/paw.png">find a park!<img
-                        class="btn-img" src="assets/images/paw.png"></button>        
+                <button type="submit" id="zipbutton" class="btn btn-block"><img class="btn-img" src="assets/images/paw.png">find
+                    a park!<img class="btn-img" src="assets/images/paw.png"></button>
             </div>
         </div>
     </div>
@@ -48,15 +48,27 @@
 
     <div class="listdiv">
 
+        <header class="row">
+            <div class="col-12 show weather">
+                <div id="temp">
+                    <table class="table">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">low</th>
+                                <th scope="col">high</th>
+                                <th scope="col">outside looks like</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forecast">
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+        </header>
 
         <div class="container" id="listcontainer">
-            <header class="row">
-                <div class="col-12 show weather">
-                    <h5>Current Temp in Your Area:</h5>
-                    <p id="temp"></p>
-                </div>
-            </header>
+
             <header class="row">
                 <div class="col-12 newParty">
                     <h3>Parks Near You:</h3>
@@ -68,11 +80,11 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!---------------------------------- PAGE THREE ------------------------------------------------------>
-     <div class="page3">
+    <div class="page3">
         <div class="row">
             <div class="col-sm mapCol">
                 <div id="map"></div>
@@ -129,7 +141,7 @@
             <div class="row">
                 <div class="col-11">
                     <h2 id="playPara">Let's go play!</h2>
-<br>
+                    <br>
 
                     <!-- <img class="pawprint" src="assets/images/paw-print.png"> -->
                     <h4>Fill in your pet's info to get started</h4>
