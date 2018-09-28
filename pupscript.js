@@ -135,17 +135,17 @@ NOT REMOTELY DONE
 		dogAgeD = snapshot.val().dogAge;
 
 			//Code to console log Active Parks/Users to the Console
-		console.log("Park picked is (D) " + parkNameD);
-		console.log("Start Location ID is (D) " + parkLocationD);
-		console.log("Start Time is (D) " + startTimeHD+":"+startTimeMD);
-		console.log("UNIX Start Time Below");
-		console.log(startTimeUD);
-		console.log("End Time is (D) " + endTimeHD+":"+endTimeMD);
-		console.log("UNIX End Time Below");
-		console.log(endTimeUD);
-		console.log("Dog Name is (D) " + dogNameD);
-		console.log("Dog Breed is (D) " + dogBreedD);
-		console.log("Dog Age is (D) " + dogAgeD);
+		// console.log("Park picked is (D) " + parkNameD);
+		// console.log("Start Location ID is (D) " + parkLocationD);
+		// console.log("Start Time is (D) " + startTimeHD+":"+startTimeMD);
+		// console.log("UNIX Start Time Below");
+		// console.log(startTimeUD);
+		// console.log("End Time is (D) " + endTimeHD+":"+endTimeMD);
+		// console.log("UNIX End Time Below");
+		// console.log(endTimeUD);
+		// console.log("Dog Name is (D) " + dogNameD);
+		// console.log("Dog Breed is (D) " + dogBreedD);
+		// console.log("Dog Age is (D) " + dogAgeD);
 
 		// If any errors are experienced, log them to console.
 	}, function (errorObject) {
@@ -162,12 +162,12 @@ function printActiveParks() {
            		//get each place ID
            	let placeID = user.ref.key; 
            		//console log out Place ID of park
-           		console.log("Active Park ID " + placeID);
+           		//console.log("Active Park ID " + placeID);
 
            		//don't touch
            		//GETS NAME OF PARK
            	name = user.node_.children_.root_.value.value_
-           	console.log(name + " Is a Park with a Dog");
+           	//console.log(name + " Is a Park with a Dog");
 	          	// Creating an element to have the name displayed
 	      	let aParkName = $("<button>");
 					// Adding a class of movie-btn to our button
@@ -182,13 +182,12 @@ function printActiveParks() {
 				//Adding a data-attribute with the place ID.  
 			aParkName.attr("data-id", placeID);
 				//test to see if it works
-				valueID = $(aParkName).attr("data-id");
-				console.log("test to see if data attribute worked " + valueID);
+				//valueID = $(aParkName).attr("data-id");
+				//console.log("test to see if data attribute worked " + valueID);
 
            		//GIVES DOG NAME
            	let dogName = user.node_.children_.root_.left.left.right.value.value_;
 	           	console.log(dogName + " Is the Dog's name");
-
 	          	// Creating an element to have the Dog Info displayed
 	      	let dogInfo = $("<p>");
 			  	// Adding a data-attribute
@@ -198,16 +197,31 @@ function printActiveParks() {
 				//Adding the button to the buttons-view div
 	  		$("#active").append("Dog's name: " + dogName);
 
-           		//gets dog age
-           	console.log(user.node_.children_.root_.left.left.left.value.value_);
+           		//GIVES DOG BREED
+           	let dogBreed = user.node_.children_.root_.left.left.value.value_;
+	           	console.log(dogBreed + " Is the Dog's name");
+			  	// Adding a data-attribute
+			dogInfo.attr("data-dogbreed", dogBreed);
+			  	// Providing the initial button text
+			dogInfo.text(dogBreed);
+				//Adding the button to the buttons-view div
+	  		$("#active").append("(" + dogBreed + ", ");
+
+           		//GIVES DOG AGE
+           	let dogAge = user.node_.children_.root_.left.left.left.value.value_;
+	           	console.log(dogAge + " Years Old");
+			  	// Adding a data-attribute
+			dogInfo.attr("data-dogbreed", dogAge);
+			  	// Providing the initial button text
+			dogInfo.text(dogAge);
+				//Adding the button to the buttons-view div
+	  		$("#active").append(dogAge + " Years Old)");
+
            		//end time minutes No longer need if using code snippet below
-           		//console.log(user.node_.children_.root_.left.right.left.value);
+           	console.log(user.node_.children_.root_.left.right.left.value);
            		//gives start time in UNIX
            	console.log(user.node_.children_.root_.right.right.value.value_);
            	
-           		//gives dog breed
-           	console.log(user.node_.children_.root_.left.left.value.value_);
-
 				//Use this logic to determine if user is still in the park
             	//converts UNIX time to usable datetime
            	myVar = user.node_.children_.root_.right.right.value.value_;
@@ -215,7 +229,7 @@ function printActiveParks() {
            	dt = dt +7200
            	let myDate = new Date(dt);
            	let currentDate= new Date($.now());
-           		console.log(myDate +" is user date");
+           	console.log(myDate +" is user date");
 
            	console.log(currentDate +" is myDate date");
            	if( (new Date(myDate).getTime() > new Date()))
@@ -227,6 +241,7 @@ function printActiveParks() {
 //***Grabbing and console logging the address data
 			//let address = result.results[i].vicinity;
 				//console.log("Inactive Park Address: " + address);
+			});
 
 //***Code to store the ACTIVE PARK location picked by user.  
 $(".aparkbutton").on("click", function(event){
@@ -242,7 +257,7 @@ $(".aparkbutton").on("click", function(event){
 	console.log("Park picked is " + selectedParkName);
 
 		//grab park location for later submission
-	let selectedParkID = $(aParkName).attr("data-id");
+	let selectedParkID = $(this).attr("data-id");
 	console.log("Park Id picked is " + selectedParkID);
 
 	let selectedPark = $("<h4>");
@@ -257,17 +272,13 @@ $(".aparkbutton").on("click", function(event){
 
 }); // end of Active Park Button trigger
 
-   		});
-	});
+});
 };
 
 	//calls the function to print active parks when page loads. 
 printActiveParks();
 
-
-
-
-//--CODE TO TAKE ZIP AND FIND LAT AND LONG AND TRIGGER SUBEQUENT STUFF-------/
+//--CODE TO TAKE ZIP AND FIND LAT AND LONG & TRIGGER SUBEQUENT STUFF--/
 
 		//Setting up URL for ZIPCODE
 		//Code to collect Zip Code whenever a user clicks the submit button  
@@ -289,7 +300,7 @@ printActiveParks();
 	       }).done(function (result) {
 	       			//Latitude and Longitude results!
                	userLL = result.results[0].geometry.location.lat+","+result.results[0].geometry.location.lng;
-               console.log("User lat and long: ",userLL)
+               //console.log("User lat and long: ",userLL)
 
     		$(".zipdiv").hide();
 			$(".listdiv").show();
@@ -325,19 +336,19 @@ function parkList (latlong){
         async: true,
             //we store the retrieved data in an object called "result"
     }).done(function (result) {	  
-        console.log("our url to send to places is "+ latLngUrl);
+        //console.log("our url to send to places is "+ latLngUrl);
         	//Code to console log data of nearby parks
-        console.log(result);
+        //console.log(result);
 
             //grab and console log out name of park #2 as a test
 		let name = result.results[1].name;
-    		console.log(name);
+    		//console.log(name);
     		//grab and console log out Place ID of park #2 as a test
     	place_id = result.results[1].place_id;
-    		console.log(place_id);
+    		//console.log(place_id);
     		 //grab and console log out Address of park #2 as a test
     	address = result.results[1].vicinity;
-    		console.log(address);
+    		//console.log(address);
 
 		loopAllParks(result);
 
@@ -372,11 +383,11 @@ function parkList (latlong){
 	function printInactiveParks (i, result) {
 
 			//report which the index number of the current park
-		console.log("Park Index #: " + i);
+		//console.log("Park Index #: " + i);
 
 			//grab and console log out name of park
       	name = result.results[i].name;
-      		console.log("Inactive Park Name: " + result.results[i].name);
+      		//console.log("Inactive Park Name: " + result.results[i].name);
 
 		  	// Then dynamically generating buttons for each movie in the array
 		  	// This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
@@ -403,17 +414,17 @@ function parkList (latlong){
 
 			//grab and console log out Place ID of park
       	let placeLL = result.results[i].geometry.location;
-      	    console.log("Inactive Park Latitude/Longitude below");
-      	    console.log(placeLL);
+      	    //console.log("Inactive Park Latitude/Longitude below");
+      	    //console.log(placeLL);
 			//Adding a data-attribute with the place ID.  
 		parkName.attr("data-ll", placeLL);
 			//test to see if it works
 			valuell = $(parkName).attr("data-ll");
-			console.log(valuell);
+			//console.log(valuell);
 
 			//Grabbing and console logging the address data
       	let address = result.results[i].vicinity;
-      	    console.log("Inactive Park Address: " + address);
+      	    //console.log("Inactive Park Address: " + address);
           	// Creating an element to have the name displayed
       	let addressOut = $("<p>");
 		  	// Adding a data-attribute
@@ -426,8 +437,10 @@ function parkList (latlong){
 	}; //close for print inactive parks function
 
 			//Code to store the location picked by user.  
-		$(".parkbutton").on("click", function(e){
+		$(document).on("click", ".parkbutton", function(e){
 			e.preventDefault();
+
+			console.log("are we there yet?");
 
 	        $(".userdiv").show();
 			$(".listdiv").hide();
@@ -439,11 +452,12 @@ function parkList (latlong){
 	        markerArray.push(selectedParkLL);
 			console.log("Object of Selected Park",selectedParkLL);
 			
-			
 	        createMarker(markerArray);
 
 				//grab park name for later submission
-			let selectedParkName = selectedParkLL.name;
+			//let selectedParkName = selectedParkLL.name;
+
+			let selectedParkName = $(this).attr("data-name");
 			console.log("Park picked is " + selectedParkName);
 				//grab park address for later submission
 			let selectedParkAddress = selectedParkLL.vicinity;
@@ -458,11 +472,12 @@ function parkList (latlong){
 				//Adding the button to the buttons-view div
   			$(".selectedpark").html(selectedPark);
 
-			getUserData(selectedParkName, selectedParkAddress, selectedParkID);
+			getUserData(selectedParkName, selectedParkID);
 
 //***Code that presents links to that parks' Google Map / Google Locations page
 
 		}); // end of Button trigger
+
 
 //----------------------------------------------------------------
 
@@ -478,7 +493,7 @@ function parkList (latlong){
 
 		//Code to present choosen park on map.  
 	function createMarker(){
-	  console.log("markerarray", markerArray[0])
+	  //console.log("markerarray", markerArray[0])
 	  for (i=0; i<markerArray.length; i++){
 	    let marker = new google.maps.Marker({
 	      position: markerArray[i].geometry.location,
@@ -488,7 +503,7 @@ function parkList (latlong){
 	  }
 	}
 
-//-------collect data of new user and upload to Firebase--------------------
+//-------collect data of new user and upload to Firebase------------
 
 	function getUserData(selectedParkName, selectedParkID) {
 
@@ -500,8 +515,8 @@ function parkList (latlong){
 			let currentTime = moment();
 			let currentTimeM = moment(currentTime).format("MM DD hh:mm a");
 			let currentTimeU = moment(currentTime).format("X");
-				console.log("Current Time: " + currentTimeM);
-				console.log("Current Unix Time (sec): " + currentTimeU);
+				//console.log("Current Time: " + currentTimeM);
+				//console.log("Current Unix Time (sec): " + currentTimeU);
 
 				let parkName = selectedParkName;
 				let parkLocation = selectedParkID;
@@ -515,20 +530,20 @@ function parkList (latlong){
 
 				let startTime = moment().hour(startTimeH).minute(startTimeM).format("dddd, MMMM Do YYYY, h:mm:ss a");
 				let startTimeU = moment().hour(startTimeH).minute(startTimeM).format("X");
-					console.log("UNIX Start Time Below");
-					console.log(startTimeU);
-					console.log("Start Time U: " + startTimeU);
+					//console.log("UNIX Start Time Below");
+					//console.log(startTimeU);
+					//console.log("Start Time U: " + startTimeU);
 
 				let endTime = moment().hour(endTimeH).minute(endTimeM).format("dddd, MMMM Do YYYY, h:mm:ss a");
 				let endTimeU = moment().hour(endTimeH).minute(endTimeM).format("X");
-					console.log("UNIX End Time Below");
-					console.log(endTimeU);
-					console.log("End Time U: " + endTimeU);
+					//console.log("UNIX End Time Below");
+					//console.log(endTimeU);
+					//console.log("End Time U: " + endTimeU);
 
-					console.log("Park picked is " + parkName);
-					console.log("Start Location ID is " + parkLocation);
-					console.log("Start Time is " + startTimeH+":"+startTimeM);
-					console.log("End Time is " + endTimeH+":"+endTimeM);
+					//console.log("Park picked is " + parkName);
+					//console.log("Start Location ID is " + parkLocation);
+					//console.log("Start Time is " + startTimeH+":"+startTimeM);
+					//console.log("End Time is " + endTimeH+":"+endTimeM);
 					console.log("Dog Name is " + dogName);
 					console.log("Dog Breed is " + dogBreed);
 					console.log("Dog Age is " + dogAge);
