@@ -15,7 +15,30 @@
 
 <body>
 
-    <div id="pageone">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+                * element that contains the map. */
+        #map {
+            margin: 2em;
+            width: 500px;
+            height: 500px;
+            max-width: 100%;
+            border-radius: 999px;
+            -moz-border-radius: 999px;
+            -khtml-border-radius: 999px;
+            -webkit-border-radius: 999px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <div class="zipdiv">
         <div class="row">
             <div class="jumbotron jumbotron-fluid col-xs-12">
                 <div class="container ppptitle">
@@ -39,30 +62,34 @@
     </div>
 
 
-    <div id="pagetwo">
-        <header class="row">
-            <div class="col-12 show weather">
-                Current Temperature in Your Area:
-                <p id="temp"></p>
-            </div>
-        </header>
-        <br>
-        <header class="row">
-            <div class="col-12 newParty">
-                Parks Near You:
-            </div>
-        </header>
-        <div class="row">
-            <div class="col-sm" id="inactive">
+    <div class="listdiv">
+
+
+
+        <div class="container" id="listcontainer">
+            <header class="row">
+                <div class="col-12 show weather">
+                    Current Temperature in Your Area:
+                    <p id="temp"></p>
+                </div>
+            </header>
+            <br>
+            <header class="row">
+                <div class="col-12 newParty">
+                    Parks Near You:
+                </div>
+            </header>
+            <div class="row">
+                <div class="col-sm" id="inactive">
+                </div>
             </div>
         </div>
     </div>
-    </div>
-
+    
 
 
     <!---------------------------------- PAGE THREE ------------------------------------------------------>
-    <div id="page3">
+    <!--  <div id="page3">
         <div class="row">
             <div class="col-sm map">
                 <span class="dot">
@@ -118,25 +145,29 @@
                 <button type="submit" class="btn" id="add-pup-3">Add a pup!</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!------------------------------------------------- PAGE FOUR ------------------------------------------------------------------>
 
-    <div id="page4">
+    <div class="userdiv">
+                <div id="map"></div>
         <div class="row heading">
             <div class="col-10">
                 <h2>Let's go play!</h2>
+
+                
                 <!-- <img class="pawprint" src="assets/images/paw-print.png"> -->
                 <p>Fill in your pet's info to get started</p>
             </div>
         </div>
+    
 
 
         <form id="add-dog-form">
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label>What's you pet's name?</label>
+                        <label>What's your pet's name?</label>
                         <input type="text" class="form-control" id="dogName" placeholder="Ex: Fido">
                     </div>
                 </div>
@@ -170,13 +201,13 @@
 
     </div>
     <!-- google api's -->
-<!--     <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&librares=places"></script> -->
+    <!--     <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&librares=places"></script> -->
 
     <!-- jquery link -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-        
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI"></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&callback=initMap"></script>
     <!--   firebase js link -->
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <!-- moment.js -->
@@ -185,7 +216,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <!-- javascript -->
-    <script src="assets/javascript/logic.js"></script>
+    <script src="pupscript.js"></script>
 
 </body>
 
