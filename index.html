@@ -19,12 +19,16 @@
         <div class="row">
             <div class="jumbotron jumbotron-fluid col-xs-12">
                 <div class="container ppptitle">
-                    <h1 class="display-4">Pups, Parks, and Playdates</h1>
-                    <p class="lead">Welcome to the party! Enter your zip code to get started.</p>
+                    <h1 class="display-4">Pups, Parks, &amp; Playdates</h1>
+                    <p class="lead">Welcome to the party!</p>
+                    <p class="lead-zip">Enter your zip code to get started.</p>
                 </div>
             </div>
 
-
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
         </div>
         <div class="row zipCode">
             <div class="offset-2"></div>
@@ -32,10 +36,12 @@
                 <input type="number" class="form-control" id="zip" placeholder="Zip Code">
             </div>
         </div>
+        <br>
+        <br>
         <div class="row gozip">
             <div class="input-group-append">
-                    <button type="submit" id="zipbutton" class="btn btn-block"><img class="btn-img" src="assets/images/paw.png">find a park!<img
-                        class="btn-img" src="assets/images/paw.png"></button>        
+                <button type="submit" id="zipbutton" class="btn btn-block"><img class="btn-img" src="assets/images/paw.png">find
+                    a park!<img class="btn-img" src="assets/images/paw.png"></button>
             </div>
         </div>
     </div>
@@ -43,19 +49,30 @@
 
     <div class="listdiv">
 
+        <header class="row">
+            <div class="col-12 show weather">
+                <div id="temp">
+                    <table class="table">
+                        <thead class="thead">
+                            <tr>
+                                <th scope="col">low</th>
+                                <th scope="col">high</th>
+                                <th scope="col">outside looks like</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forecast">
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+        </header>
 
         <div class="container" id="listcontainer">
-            <header class="row">
-                <div class="col-12 show weather">
-                    Current Temperature in Your Area:
-                    <p id="temp"></p>
-                </div>
-            </header>
-            <br>
+
             <header class="row">
                 <div class="col-12 newParty">
-                    Parks Near You:
+                    <h3>Parks Near You:</h3>
                 </div>
             </header>
             <div class="row">
@@ -64,15 +81,14 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!---------------------------------- PAGE THREE ------------------------------------------------------>
-     <div class="page3">
+    <div class="page3">
         <div class="row">
-            <div class="col-sm map">
-                <span class="dot" id="map">
-                </span>
+            <div class="col-sm mapCol">
+                <div id="map"></div>
             </div>
         </div>
         <div class="row">
@@ -99,14 +115,14 @@
                             <td>4</td>
                             <td>Jack Russle</td>
                             <td>12:45pm</td>
-                            <td class="time">1:45</td>
+                            <td class="time">1:45pm</td>
                         </tr>
                         <tr>
                             <td>Nara</td>
                             <td>5</td>
                             <td>Mutt</td>
-                            <td>10am</td>
-                            <td class="time">12pm</td>
+                            <td>10:00am</td>
+                            <td class="time">12:00pm</td>
                         </tr>
                     </tbody>
                 </table>
@@ -114,67 +130,64 @@
         </div>
         <div class="row btnRow">
             <div class="col-sm add-dog">
-                <button type="submit" class="btn" id="add-pup">Add a pup!</button>
+                <button type="submit" class="btn" id="add-pup-3">Add a pup!</button>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!------------------------------------------------- PAGE FOUR ------------------------------------------------------------------>
 
     <div class="userdiv">
-        <div class="row heading">
-            <div class="col-10">
-                <h2>Let's go play!</h2>
+        <div class="container contPlay">
+            <div class="row">
+                <div class="col-11">
+                    <h2 id="playPara">Let's go play!</h2>
+                    <br>
 
-
-                
-                <!-- <img class="pawprint" src="assets/images/paw-print.png"> -->
-                <p>Fill in your pet's info to get started</p>
+                    <!-- <img class="pawprint" src="assets/images/paw-print.png"> -->
+                    <h4>fill in your pet's info to check in</h4>
+                </div>
             </div>
         </div>
 
-    
+        <br>
 
-
-        <form id="add-dog-form">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="form-group">
-                        <label>What's your pet's name?</label>
-                        <input type="text" class="form-control" id="dogName" placeholder="Ex: Fido">
+        <div class="containerForm">
+            <form id="add-dog-form">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label>What's your pet's name?</label>
+                            <input type="text" class="form-control" id="dogName" placeholder="Ex: Fido">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label>How old is your pet?</label>
+                            <input type="text" class="form-control" id="dogAge" placeholder="Ex: 4 years">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label for="dog-breed">What is your dog's breed?</label>
+                            <input type="text" class="form-control" id="dogBreed" placeholder="Ex: Beagle, Mutt, etc.">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label>How long will you stay and play?</label>
+                            <input type="text" class="form-control" id="startTime" placeholder="Start Time (HH:mm military time)">
+                            <input type="text" class="form-control" id="endTime" placeholder="End Time (HH:mm military time">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="form-group">
-                        <label>How old is your pet?</label>
-                        <input type="text" class="form-control" id="dogAge" placeholder="Ex: 4 years">
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-group">
-                        <label for="dog-breed">What is your dog's breed?</label>
-                        <input type="text" class="form-control" id="dogBreed" placeholder="Ex: Beagle, Mutt, etc.">
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-group">
-                        <label>How long will you stay and play?</label>
-                        <input type="text" class="form-control" id="startTime" placeholder="Start Time (HH:mm military time)">
-                        <input type="text" class="form-control" id="endTime" placeholder="End Time (HH:mm military time">
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <button type="submit" id="submit" class="btn btn-block dogdaybutton"><img class="btn-img" src="assets/images/paw.png">Play
-                Time!
-                <img class="btn-img" src="assets/images/paw.png"></button>
-        </form>
+                <button type="submit" id="submit" class="btn btn-block dogdaybutton"><img class="btn-img" src="assets/images/paw.png">Play
+                    Time!
+                    <img class="btn-img" src="assets/images/paw.png"></button>
+            </form>
+        </div>
 
     </div>
-    <!-- google api's -->
-    <!--     <script async defer     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjOzz5XzUwhDvQ7JNpCTWs1v4dqfDbtZI&librares=places"></script> -->
 
     <!-- jquery link -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -189,7 +202,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <!-- javascript -->
-    <script src="assets/javascript/pupscript.js"></script>
+    <script src="assets/javascript/app.js"></script>
 
 </body>
 
