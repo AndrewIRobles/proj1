@@ -28,16 +28,14 @@ A puppy playdate mobile app that utilizes Firebase, Moment, and API calls to Goo
 
 ## Future Development:
 
- -back buttons will be added for easier "page" navigation
- 
- -dropdown menu will be added to park list "page" to toggle between "all parks" and "parks with pups"
- 
- -user authentication
-      -allow users to create profile
-      -upload pics
-      -description of dog (temperament,likes/dislikes, etc.)
-      -allow users to coordinate and plan future pup playdates
-      -allow users to store favorite parks
-      -allow users to "friend" other users
-      
--users will be deleted from Firebase database when their park session ends (or alternatively, at the end of each day)
+ - Back buttons will be added for easier "page" navigation
+ - Dropdown menu will be added to park list "page" to toggle between "all parks" and "parks with pups" 
+ - Users will be deleted from Firebase database when their park session ends (or alternatively, at the end of each day)
+ - User authentication
+      - Allow users to create profile
+      - Upload pics
+      - Description of dog (temperament,likes/dislikes, etc.)
+      - Allow users to coordinate and plan future pup playdates
+      - Allow users to store favorite parks
+      - Allow users to "friend" other users
+
